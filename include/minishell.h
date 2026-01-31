@@ -1,22 +1,32 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+//The master structure that controls everything
 typedef struct s_minishell{
 	t_env	*env_list;
 	t_token	*tokens;
 	t_cmd	*cmd_list;
-	int		exit_status;
-	int		syntax_error;//for $?
-	int		stdin_backup;// 
+	int		exit_status;//for $?
+	int		syntax_error;// syntax_error flag
+	int		stdin_backup;// for redirection and built-in commands
 	int		stdout_backup;
 }t_minishell;
 
+/*
+ * The third argument to the main function,char **envp, 
+ * is managed as a structure to facilitate adding and removing elements.
+*/
 typedef struct s_env{
 	char			*key;
 	char			*value;
 	struct s_env	*next;
 }t_env;
 
+/*
+ * After parsing the token, 
+ * the struct of "pipe-separated command(processing) units"
+ * that is finally passed to the execve function or pipe processing.
+ */
 typedef struct s_cmd{
 	char			**args;
 	t_list			*redirects;
@@ -39,6 +49,11 @@ typedef struct s_redirect{
 	int				fd;
 }t_redirect;
 
+/*
+ * The struct for storing command strings entered by a user
+ * in a shell when they are broken down into "tokens" to make them easier
+ * for programs to handle.
+*/
 typedef enum e_token_type{
 	WORD,
 	PIPE,
