@@ -1,16 +1,12 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-//The master structure that controls everything
-typedef struct s_minishell{
-	t_env	*env_list;
-	t_token	*tokens;
-	t_cmd	*cmd_list;
-	int		exit_status;//for $?
-	int		syntax_error;// syntax_error flag
-	int		stdin_backup;// for redirection and built-in commands
-	int		stdout_backup;
-}t_minishell;
+# include <stddef.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include "libft.h"
 
 /*
  * The third argument to the main function,char **envp, 
@@ -21,20 +17,6 @@ typedef struct s_env{
 	char			*value;
 	struct s_env	*next;
 }t_env;
-
-/*
- * After parsing the token, 
- * the struct of "pipe-separated command(processing) units"
- * that is finally passed to the execve function or pipe processing.
- */
-typedef struct s_cmd{
-	char			**args;
-	t_list			*redirects;
-	int				pid;
-	struct s_cmd	*next;
-	int				fd_in;
-	int				fd_out;
-}t_cmd;
 
 typedef enum e_redirect_type{
 	REDIR_IN,
@@ -57,10 +39,10 @@ typedef struct s_redirect{
 typedef enum e_token_type{
 	WORD,
 	PIPE,
-	REDIR_IN,
-	REDIR_OUT,
-	APPEND,
-	HEREDOC
+	TOKEN_REDIR_IN,
+	TOKEN_REDIR_OUT,
+	TOKEN_APPEND,
+	TOKEN_HEREDOC
 }t_token_type;
 
 typedef struct s_token{
@@ -69,5 +51,30 @@ typedef struct s_token{
 	struct s_token	*next;
 	struct s_token	*prev;
 }t_token;
+
+/*
+ * After parsing the token, 
+ * the struct of "pipe-separated command(processing) units"
+ * that is finally passed to the execve function or pipe processing.
+ */
+typedef struct s_cmd{
+	char			**args;
+	t_list			*redirects;
+	int				pid;
+	struct s_cmd	*next;
+	int				fd_in;
+	int				fd_out;
+}t_cmd;
+
+//The master structure that controls everything
+typedef struct s_minishell{
+	t_env	*env_list;
+	t_token	*tokens;
+	t_cmd	*cmd_list;
+	int		exit_status;//for $?
+	int		syntax_error;// syntax_error flag
+	int		stdin_backup;// for redirection and built-in commands
+	int		stdout_backup;
+}t_minishell;
 
 #endif
