@@ -8,6 +8,10 @@
 # include <readline/history.h>
 # include "libft.h"
 
+# define SUCCESS 0
+# define FAILURE 1
+# define SKIP -1
+
 /*
  * The third argument to the main function,char **envp, 
  * is managed as a structure to facilitate adding and removing elements.
@@ -15,6 +19,7 @@
 typedef struct s_env{
 	char			*key;
 	char			*value;
+	bool			is_env;
 	struct s_env	*next;
 }t_env;
 
