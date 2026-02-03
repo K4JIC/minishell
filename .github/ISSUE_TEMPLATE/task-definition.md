@@ -7,4 +7,4 @@ assignees: K4JIC
 
 ---
 
-Due_date: yyyy/mm/dd
+Due_date: 2026/02/dd
