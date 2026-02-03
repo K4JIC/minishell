@@ -1,48 +1,57 @@
 #include "minishell.h"
 
-static t_env	*create_env_node(char *key, char *value)
+static t_env	*create_env_content(char *key, char *value)
 {
-	t_env	*node;
+	t_env	*env;
 
-	node = malloc(sizeof(t_env));
+	env = malloc(sizeof(t_env));
+	if (!env)
+		return (NULL);
+	env->key = ft_strdup(key);
+	if (!env->key)
+	{
+		free(env);
+		return (NULL);
+	}
+	env->value = ft_strdup(value);
+	if (!env->value)
+	{
+		free(env->key);
+		free(env);
+		return (NULL);
+	}
+	return (env);
+}
+
+static t_list	*create_env_node(char *key, char *value)
+{
+	t_env	*env;
+	t_list	*node;
+
+	env = create_env_content(key, value);
+	if (!env)
+		return (NULL);
+	node = ft_lstnew(env);
 	if (!node)
-		return (NULL);
-	node->key = ft_strdup(key);
-	if (!node->key)
 	{
-		free(node);
+		free(env->value);
+		free(env->key);
+		free(env);
 		return (NULL);
 	}
-	node->value = ft_strdup(value);
-	if (!node->value)
-	{
-		free(node->key);
-		free(node);
-		return (NULL);
-	}
-	node->is_env = true;
-	node->next = NULL;
 	return (node);
 }
 
-static void	add_env_node(t_env **head, t_env *new_node)
+static void	add_env_node(t_list **head, t_list *new_node)
 {
-	t_env	*current;
-
-	if (!*head)
-	{
-		*head = new_node;
+	if (!new_node)
 		return ;
-	}
-	current = *head;
-	while (current->next)
-		current = current->next;
-	current->next = new_node;
+	ft_lstadd_back(head, new_node);
 }
 
-static int set_val_and_key(char *env_str, t_env **env_list)
+static int	set_val_and_key(char *env_str, t_list **env_list)
 {
-	t_env	*new_node;
+	t_list	*new_node;
 	char	*key;
 	char	*value;
 
@@ -60,9 +69,9 @@ static int set_val_and_key(char *env_str, t_env **env_list)
 	return (SUCCESS);
 }
 
-t_env	*envp_to_lst(char **envp)
+t_list	*envp_to_lst(char **envp)
 {
-	t_env	*env_list;
+	t_list	*env_list;
 	int		ret;
 	int		i;
 

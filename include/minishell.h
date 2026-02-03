@@ -19,8 +19,6 @@
 typedef struct s_env{
 	char			*key;
 	char			*value;
-	bool			is_env;
-	struct s_env	*next;
 }t_env;
 
 typedef enum e_redirect_type{
@@ -73,7 +71,7 @@ typedef struct s_cmd{
 
 //The master structure that controls everything
 typedef struct s_minishell{
-	t_env	*env_list;
+	t_list	*env_list;
 	t_token	*tokens;
 	t_cmd	*cmd_list;
 	int		exit_status;//for $?
@@ -81,5 +79,7 @@ typedef struct s_minishell{
 	int		stdin_backup;// for redirection and built-in commands
 	int		stdout_backup;
 }t_minishell;
+
+t_list	*envp_to_lst(char **envp);
 
 #endif
