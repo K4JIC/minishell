@@ -6,7 +6,7 @@
 /*   By: tozaki <tozaki@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 13:59:32 by tozaki            #+#    #+#             */
-/*   Updated: 2026/02/04 08:02:07 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/02/04 18:32:45 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,14 @@
  */
 static int	get_operator_len(char *s)
 {
-	static char	*op3[2] = {";;&", NULL};
-	static char	*op2[8] = {"&&", "||", "|&", ";&", ";;", "<<", ">>", NULL};
-	static char	*op1[8] = {"&", "|", ";", "(", ")", "<", ">", NULL};
-	int		i;
-
-	i = 0;
-	while (op3[i])
-	{
-		if (ft_strncmp(op3[i], s, 3) == 0)
-			return (3);
-		i++;
-	}
-	i = 0;
-	while (op2[i])
-	{
-		if (ft_strncmp(op2[i], s, 2) == 0)
-			return (2);
-		i++;
-	}
-	i = 0;
-	while (op1[i])
-	{
-		if (ft_strncmp(op1[i], s, 1) == 0)
-			return (1);
-		i++;
-	}
+	if (ft_strncmp(";;s", s, 3) == 0)
+		return (3);
+	if (s[0] == s[1] && ft_strchr("&|;<>", s, 2))
+		return (2);
+	if (ft_strncmp("|&", s, 2) && ft_strncmp(";&", s, 2))
+		return (2);
+	if (ft_strchr("&|;<>()=", s, 1) == 0)
+		return (1);
 	return (0);
 }
 
@@ -89,22 +71,22 @@ t_list	*lexer(char *line)
 	i = 0;
 	while (line[i])
 	{
-		while (ft_isspace(line[i]))
+		while (ft_isspace(line[i])
 			i++;
 		if (line[i] == '\0')
 			break ;
 		token_content = get_first_token(&line[i]);
 		if (!token_content)
-			break ;
+			return (lst_clear(&token_list, free), NULL);
 		new_lst = ft_lstnew(token_content);
 		if (!new_lst)
-			return (NULL);
+			return (lst_clear(&token_list, free), NULL);
 		ft_lstadd_back(&token_list, new_lst);
 		i += ft_strlen(token_content);
 	}
 	new_lst = ft_lstnew(NULL);
 	if (!new_lst)
-		return (NULL);
+		return (lst_clear(&token_list, free), NULL);
 	ft_lstadd_back(&token_list, new_lst);
 	return (token_list);
 }
