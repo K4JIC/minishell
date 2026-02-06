@@ -42,13 +42,6 @@ static t_list	*create_env_node(char *key, char *value)
 	return (node);
 }
 
-static void	add_env_node(t_list **head, t_list *new_node)
-{
-	if (!new_node)
-		return ;
-	ft_lstadd_back(head, new_node);
-}
-
 static int	set_val_and_key(char *env_str, t_list **env_list)
 {
 	t_list	*new_node;
@@ -65,7 +58,7 @@ static int	set_val_and_key(char *env_str, t_list **env_list)
 	free(key);
 	if (!new_node)
 		return (FAILURE);
-	add_env_node(env_list, new_node);
+	// TODO: Maybe there aren't enough NULL checks.	ft_lstadd_back(env_list, new_node);
 	return (SUCCESS);
 }
 
