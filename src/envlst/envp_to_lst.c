@@ -58,7 +58,8 @@ static int	set_val_and_key(char *env_str, t_list **env_list)
 	free(key);
 	if (!new_node)
 		return (FAILURE);
-	// TODO: Maybe there aren't enough NULL checks.	ft_lstadd_back(env_list, new_node);
+	// TODO: Maybe there aren't enough NULL checks.
+	ft_lstadd_back(env_list, new_node);
 	return (SUCCESS);
 }
 
