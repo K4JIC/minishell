@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-// TODO: Normチェックを行う
+// TODO: Normチェックを行う,Header入れる
 int	ft_pwd(void)
 {
 	char	*cwd;
