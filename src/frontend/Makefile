@@ -1,10 +1,22 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: tozaki <tozaki@student.42.jp>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2026/02/28 00:08:14 by tozaki            #+#    #+#              #
+#    Updated: 2026/02/28 00:08:15 by tozaki           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 # Basic settings
 NAME    := myprog
 CC      := cc
 CFLAGS  := -Wall -Wextra -Werror -Iincludes -MMD -MP
 
 ifdef DEBUG
-CFLAGS += -D DEBUG=1
+CFLAGS += -DDEBUG=1
 endif
 
 # Source directories (追加する場合はここに追記)
