@@ -6,11 +6,12 @@
 /*   By: tozaki <tozaki@student.42.jp>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 00:07:56 by tozaki            #+#    #+#             */
-/*   Updated: 2026/02/28 00:07:57 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/02/28 16:25:24 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operate_list.h"
+#include "libft.h"
 #include <stdlib.h>
 #include <strings.h>
 #include <stdio.h>
@@ -51,20 +52,3 @@ void	free_all_token(t_token *head)
 	apply_func(&head->list, free_token);
 }
 
-#ifdef DEBUG
-int	main(void)
-{
-	t_token	*fir;
-	t_token	*sec;
-	t_token	*thi;
-
-	fir = create_token("fir");
-	sec = create_token("sec");
-	thi = create_token("thi");
-	add_token_last(fir, sec);
-	add_token_last(fir, thi);
-	print_all_token(fir);
-	free_all_token(fir);
-	return (0);
-}
-#endif

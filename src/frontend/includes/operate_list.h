@@ -6,7 +6,7 @@
 /*   By: tozaki <tozaki@student.42.jp>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 23:02:08 by tozaki            #+#    #+#             */
-/*   Updated: 2026/02/27 23:02:11 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/02/28 16:30:46 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,3 +51,5 @@ void		free_all_token(t_token *head);
 // for debug
 void		*print_token(void *token);
 void		print_all_token(t_token *head);
+
+

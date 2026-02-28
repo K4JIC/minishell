@@ -6,21 +6,24 @@
 #    By: tozaki <tozaki@student.42.jp>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/28 00:08:14 by tozaki            #+#    #+#              #
-#    Updated: 2026/02/28 00:08:15 by tozaki           ###   ########.fr        #
+#    Updated: 2026/02/28 16:41:00 by tozaki           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Basic settings
 NAME    := myprog
 CC      := cc
-CFLAGS  := -Wall -Wextra -Werror -Iincludes -MMD -MP
+CFLAGS  := -Wall -Wextra -Werror -MMD -MP
+INCLUDES	:=	-Iincludes -I../libft
 
 ifdef DEBUG
 CFLAGS += -DDEBUG=1
 endif
 
 # Source directories (追加する場合はここに追記)
-SRCDIRS := utils
+SRCDIRS := utils\
+		   lexer\
+		   test
 
 # Collect source files and map them to objs/.../*.o preserving directory layout
 SRC     := $(foreach dir,$(SRCDIRS),$(wildcard $(dir)/*.c))
@@ -39,7 +42,7 @@ all: $(NAME)
 
 # Link objects + libft
 $(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $@
+	$(CC) $(INCLUDES) $(CFLAGS) $(OBJS) $(LIBFT) -o $@
 
 # Build libft if needed (delegates to ../libft's Makefile)
 $(LIBFT):
@@ -49,7 +52,7 @@ $(LIBFT):
 # (mkdir -p for target directory so nested dirs are created)
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(INCLUDES) $(CFLAGS) -c $< -o $@
 
 # Include auto-generated dependency files (no error if missing)
 -include $(DEPS)
