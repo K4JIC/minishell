@@ -6,7 +6,7 @@
 /*   By: tozaki <tozaki@student.42.jp>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 00:07:56 by tozaki            #+#    #+#             */
-/*   Updated: 2026/02/28 16:25:24 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/02/28 17:47:07 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	*free_token(void *token)
 	t_token	*casted_token;
 
 	casted_token = (t_token *)token;
+	if (casted_token->str)
+		free(casted_token->str);
 	free(casted_token);
 	return ((void *)1);
 }

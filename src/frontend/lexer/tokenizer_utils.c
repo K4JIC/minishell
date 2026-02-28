@@ -6,7 +6,7 @@
 /*   By: tozaki <tozaki@student.42.jp>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 22:31:17 by tozaki            #+#    #+#             */
-/*   Updated: 2026/02/28 17:17:35 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/02/28 17:53:12 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,13 @@ int	get_quoted_token_len(char *p)
 	len = 0;
 	quote_mark = p[0];
 	len++;
-	while (p[len] != quote_mark || p[len])
+	while (p[len] != quote_mark && p[len])
+	{
+		// printf("p[len] = %c\n", p[len]);
 		len++;
+	}
 	if (p[len] == quote_mark)
-		return (len);
+		return (len + 1);
 	else
 		return (-2);
 }
@@ -78,12 +81,12 @@ int	get_one_token_len(char *p)
 	return (len);
 }
 
-int	store_one_token(t_token *head, char *p, unsigned int start, size_t token_len)
+int	store_one_token(t_token **head, char *p, unsigned int start, size_t token_len)
 {
 	char	*str;
 	t_token	*new_token;
 
-	if (!head || !token_len)
+	if (!token_len)
 		return (FAILURE);
 	str = ft_substr(p, start, token_len);
 	if (!str)
@@ -94,7 +97,10 @@ int	store_one_token(t_token *head, char *p, unsigned int start, size_t token_len
 		free(str);
 		return (FAILURE);
 	}
-	add_token_last(head, new_token);
+	if (!*head)
+		*head = new_token;
+	else
+		add_token_last(*head, new_token);
 	return (SUCCESS);
 }
 
@@ -104,7 +110,7 @@ t_token	*tokenizer(char *p)
 	int		i;
 	int		len;
 
-	head = create_token("");
+	head = NULL;
 	i = 0;
 	while (p[i])
 	{
@@ -112,11 +118,19 @@ t_token	*tokenizer(char *p)
 			i++;
 		if (!p[i])
 			break ;
-		printf("i = %d, p[i] = %c\n", i, p[i]);
+		// printf("i = %d, p[i] = %c\n", i, p[i]);
 		len = get_one_token_len(&(p[i]));
-		store_one_token(head, p, i, len);
+		if (len < 0)
+		{
+			free_all_token(head);
+			return (NULL);
+		}
+		if (store_one_token(&head, p, i, len) == FAILURE)
+		{
+			free_all_token(head);
+			return (NULL);
+		}
 		i += len;
 	}
 	return (head);
 }
-
