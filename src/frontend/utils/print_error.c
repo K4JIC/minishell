@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer.h                                        :+:      :+:    :+:   */
+/*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tozaki <tozaki@student.42.jp>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/28 16:31:05 by tozaki            #+#    #+#             */
-/*   Updated: 2026/02/28 18:22:54 by tozaki           ###   ########.fr       */
+/*   Created: 2026/03/03 19:14:29 by tozaki            #+#    #+#             */
+/*   Updated: 2026/03/03 19:19:45 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOKENIZER_H
-# define TOKENIZER_H
+#include <unistd.h>
+#include "libft.h"
 
-t_token	*tokenizer(char *p);
-void	set_all_lavel(t_token *head);
+int	print_error_msg(char *msg)
+{
+	return (write(2, msg, ft_strlen(msg)));
+}
 
-#endif

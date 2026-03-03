@@ -12,14 +12,15 @@
 
 #include "operate_list.h"
 
-// reusable list func
+/**
+ * intrusive list is a kind of list structure. major structure in C language projects.
+ */
 void	add_next_node(t_head_list *prev_list, t_head_list *next_list)
 {
 	prev_list->next = next_list;
 	next_list->prev = prev_list;
 }
 
-// reusable list func
 t_head_list	*get_last_node(t_head_list *head)
 {
 	t_head_list	*curr;
@@ -30,7 +31,6 @@ t_head_list	*get_last_node(t_head_list *head)
 	return (curr);
 }
 
-// reusable list func
 int	apply_func(t_head_list *head, void *(*f)(void *))
 {
 	t_head_list	*curr;

@@ -6,7 +6,7 @@
 #    By: tozaki <tozaki@student.42.jp>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/28 00:08:14 by tozaki            #+#    #+#              #
-#    Updated: 2026/02/28 16:41:00 by tozaki           ###   ########.fr        #
+#    Updated: 2026/03/03 19:10:29 by tozaki           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ $(OBJDIR)/%.o: %.c
 
 run:
 	make DEBUG=1
+	make clean
 	./$(NAME)
 
 clean:

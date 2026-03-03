@@ -13,8 +13,6 @@
 #include "operate_list.h"
 #include "libft.h"
 #include <stdlib.h>
-#include <strings.h>
-#include <stdio.h>
 
 // specialized func
 t_token	*create_token(char *str)
@@ -24,7 +22,7 @@ t_token	*create_token(char *str)
 	new_token = malloc(sizeof(t_token));
 	if (!new_token)
 		return (NULL);
-	bzero(new_token, sizeof(t_token));
+	ft_bzero(new_token, sizeof(t_token));
 	new_token->str = str;
 	return (new_token);
 }
@@ -35,6 +33,7 @@ void	add_token_last(t_token *head, t_token *new_token)
 	t_head_list	*last_list;
 
 	last_list = get_last_node(&head->list);
+	new_token->id = ((t_token *)last_list)->id + 1;
 	add_next_node(last_list, &new_token->list);
 }
 
@@ -53,4 +52,3 @@ void	free_all_token(t_token *head)
 {
 	apply_func(&head->list, free_token);
 }
-

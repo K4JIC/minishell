@@ -6,7 +6,7 @@
 /*   By: tozaki <tozaki@student.42.jp>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 23:02:08 by tozaki            #+#    #+#             */
-/*   Updated: 2026/02/28 16:30:46 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/02/28 18:14:24 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ typedef enum e_token_type
 	TOKEN_REDIR_IN,
 	TOKEN_REDIR_OUT,
 	TOKEN_APPEND,
-	TOKEN_HEREDOC
+	TOKEN_HEREDOC,
+	QUOTED,
+	OTHER_OPERATOR
 }	t_token_type;
 
 typedef struct s_token
@@ -51,5 +53,3 @@ void		free_all_token(t_token *head);
 // for debug
 void		*print_token(void *token);
 void		print_all_token(t_token *head);
-
-
