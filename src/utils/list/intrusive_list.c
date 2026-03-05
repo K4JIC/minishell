@@ -10,11 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "operate_list.h"
+#include "ms_utils.h"
 
-/**
- * intrusive list is a kind of list structure. major structure in C language projects.
- */
+// intrusive list is a kind of list structure.
 void	add_next_node(t_head_list *prev_list, t_head_list *next_list)
 {
 	prev_list->next = next_list;

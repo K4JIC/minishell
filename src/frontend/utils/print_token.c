@@ -10,19 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "operate_list.h"
-#include <stdio.h>
+#include "tokenizer.h"
 
-/**
- * functions for confirm all member of the token list. use for debug.
- */
-
+// print all member of tokens. use for debug.
 void	*print_token(void *token)
 {
 	t_token	*casted_token;
 
 	casted_token = (t_token *)token;
-	printf("id = %2d, type = %2d, str = %s\n", casted_token->id, casted_token->type, casted_token->str);
+	ft_printf("id = %2d, type = %2d, str = %s\n", casted_token->id, casted_token->type, casted_token->str);
 	return (token);
 }
 

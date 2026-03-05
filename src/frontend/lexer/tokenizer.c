@@ -10,14 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "operate_list.h"
-#include "frontend_utils.h"
-#include "libft.h"
-#include <stddef.h>
+#include "tokenizer.h"
 
-/**
- *
- */
 int	store_one_token(t_token **head, char *p, unsigned int start, size_t token_len)
 {
 	char	*str;
@@ -58,7 +52,7 @@ t_token	*tokenizer(char *p)
 		len = get_one_token_len(&(p[i]));
 		if (len < 0 || store_one_token(&head, p, i, len) == FAILURE)
 		{
-			if (len == NO_CLOSE)
+			if (len == NO_CLOSE_QUOTE)
 				print_error_msg("No end of quote\n");
 			free_all_token(head);
 			return (NULL);

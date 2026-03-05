@@ -17,4 +17,3 @@ int	print_error_msg(char *msg)
 {
 	return (write(2, msg, ft_strlen(msg)));
 }
-

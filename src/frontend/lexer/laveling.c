@@ -6,12 +6,11 @@
 /*   By: tozaki <tozaki@student.42.jp>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 18:04:56 by tozaki            #+#    #+#             */
-/*   Updated: 2026/02/28 18:25:05 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/03/05 17:01:54 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "operate_list.h"
-#include "libft.h"
+#include "tokenizer.h"
 
 t_token_type	distinguish_type(char *str)
 {
@@ -27,8 +26,6 @@ t_token_type	distinguish_type(char *str)
 		return (TOKEN_REDIR_OUT);
 	else if (str[0] == '|')
 		return (PIPE);
-	else if (str[0] == 34 || str[0] == 39)
-		return (QUOTED);
 	else
 		return (WORD);
 }
