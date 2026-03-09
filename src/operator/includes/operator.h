@@ -28,10 +28,11 @@ typedef struct s_cmd{
 }t_cmd;
 
 // execute_command
-int	isaccessible(char *cmd_name, char *env_value)
+int	isaccessible(char *cmd_name, char *env_value);
 
-pid_t	build_first_pipe(char *cmd[])
+pid_t	build_first_pipe(void);
+pid_t	build_pipe(void);
 
-t_list	*envp_to_lst(char **envp);
+// t_list	*envp_to_lst(char **envp);
 
 #endif

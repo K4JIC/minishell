@@ -6,13 +6,14 @@
 /*   By: tozaki <tozaki@student.42.jp>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 22:31:17 by tozaki            #+#    #+#             */
-/*   Updated: 2026/03/03 19:22:59 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/03/05 20:59:05 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tokenizer.h"
 
-int	store_one_token(t_token **head, char *p, unsigned int start, size_t token_len)
+int	store_one_token(t_token **head,
+		char *p, unsigned int start, size_t token_len)
 {
 	char	*str;
 	t_token	*new_token;
