@@ -14,23 +14,32 @@
 # define OPERATOR_H
 
 #include <sys/types.h>
+#include <threads.h>
 #include <unistd.h>
 #include "libft.h"
 
-typedef struct s_cmd{
-	char			*name;
-	char			**args;
-	t_list			*redirects;
-	int				pid;
-	struct s_cmd	*next;
-	int				fd_in;
-	int				fd_out;
-}t_cmd;
+// typedef struct s_cmd{
+// 	char			*name;
+// 	char			**args;
+// 	t_list			*redirects;
+// 	int				pid;
+// 	struct s_cmd	*next;
+// 	int				fd_in;
+// 	int				fd_out;
+// }t_cmd;
+
+typedef enum error
+{
+	E_ARG=-1,
+	E_MALLOC=-2,
+	E_PIPE=-3,
+	E_FORK=-4
+}	t_error;
 
 // execute_command
-int	isaccessible(char *cmd_name, char *env_value);
+int	isaccessible(char *cmd_name, char menv_value);
 
-pid_t	build_first_pipe(void);
+pid_t	build_first_pipe(int *prev_in);
 pid_t	build_pipe(void);
 
 // t_list	*envp_to_lst(char **envp);

@@ -6,55 +6,141 @@
 /*   By: tozaki <tozaki@student.42.jp>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 19:01:45 by tozaki            #+#    #+#             */
-/*   Updated: 2026/03/05 14:53:22 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/03/09 11:13:05 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "operator.h"
+#include "ms_utils.h"
 
-pid_t	build_first_pipe(void)
+#include <stdio.h>
+#include <sys/wait.h>
+
+typedef struct s_cmd
 {
-	int		fd[2];
-	pid_t	pid;
+	t_head_list	list;
+	char		*cmd_name;
+	char		**args;
+	char		**envp;
+}	t_cmd;
 
-	pipe(fd);
+int	do_parent(int id_c)
+
+int	recursive_pipe(int id_cmd, int num_cmds, int prev_in)
+{
+	int	fd[2];
+	int	pid;
+	int	wstatus;
+
+	if (id_cmd == num_cmds)
+		return (0);
+	if (pipe(fd) == -1)
+		return (-1);
 	pid = fork();
 	if (pid != 0)
 	{
+		close(prev_in);
 		close(fd[1]);
-		dup2(fd[0], STDIN_FILENO);
-		close(fd[0]);
+		recursive_pipe(id_cmd++, num_cmds, fd[0]);
+		waitpid(pid, &wstatus, 0);
 	}
-	else
+	if (pid == 0)
 	{
-		close(fd[0]);
+		dup2(prev_in, STDIN_FILENO);
 		dup2(fd[1], STDOUT_FILENO);
+		close(prev_in);
+		close(fd[0]);
 		close(fd[1]);
 	}
 	return (pid);
 }
 
-pid_t	build_pipe(void)
-{
-	int		fd[2];
-	pid_t	pid;
-
-	pipe(fd);
-	pid = fork();
-	if (pid != 0)
-	{
-		close(fd[1]);
-		dup2(fd[0], STDIN_FILENO);
-		close(fd[0]);
-	}
-	else
-	{
-		close(fd[0]);
-		dup2(fd[1], STDOUT_FILENO);
-		close(fd[1]);
-	}
-	return (pid);
-}
+// pid_t	build_first_pipe(int *prev_in)
+// {
+	// int		fd[2];
+	// pid_t	pid;
+//
+	// if (pipe(fd) == -1)
+		// return (-1);
+	// pid = fork();
+	// if (pid != 0)
+	// {
+		// close(fd[1]);
+		// *prev_in = fd[0];
+	// }
+	// else
+	// {
+		// close(fd[0]);
+		// dup2(fd[1], STDOUT_FILENO);
+		// close(fd[1]);
+	// }
+	// return (pid);
+// }
+//
+// pid_t	build_middle_pipe(int *prev_in)
+// {
+	// int		fd[2];
+	// pid_t	pid;
+//
+	// if (pipe(fd) == -1)
+		// return (-1);
+	// pid = fork();
+	// if (pid != 0)
+	// {
+		// close(fd[1]);
+		// close(*prev_in);
+		// *prev_in = fd[0];
+	// }
+	// else
+	// {
+		// dup2(*prev_in, STDIN_FILENO);
+		// dup2(fd[1], STDOUT_FILENO);
+		// close(*prev_in);
+		// close(fd[0]);
+		// close(fd[1]);
+	// }
+	// return (pid);
+// }
+//
+// pid_t	build_last_pipe(int *prev_in)
+// {
+	// pid_t	pid;
+//
+	// pid = fork();
+	// if (pid != 0)
+	// {
+		// close(*prev_in);
+		// *prev_in = -1;
+	// }
+	// else
+	// {
+		// dup2(*prev_in, STDIN_FILENO);
+		// close(*prev_in);
+	// }
+	// return (pid);
+// }
+//
+// int	build_pipes(t_cmd *head)
+// {
+	// int	nr_cmds;
+	// int	i;
+	// int	*pids;
+	// int	prev_in;
+//
+	// if (nr_cmds == 1)
+		// return (-1);
+	// pids = (int *)malloc(sizeof(int) * nr_cmds);
+	// if (!pids)
+		// return (-1);
+	// prev_in = 0;
+	// pids[0] = build_first_pipe(&prev_in);
+	// i = 1;
+	// while (i < nr_cmds)
+	// {
+		// pids[i] = build_middle_pipe(&prev_in);
+//
+	// }
+// }
 
 // int	execute_one_cmd(char *cmd[], int pipe_num)
 // {

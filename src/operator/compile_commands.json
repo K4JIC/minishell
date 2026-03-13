@@ -1,0 +1,83 @@
+[
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Iincludes",
+            "-I../libft",
+            "-I../utils/includes",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-o",
+            "objs/test/cmd_test.o",
+            "test/cmd_test.c"
+        ],
+        "directory": "/home/tozaki/cursus/level3/minishell-dev/src/operator",
+        "file": "test/cmd_test.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Iincludes",
+            "-I../libft",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-o",
+            "objs/quote/ms_quote.o",
+            "quote/ms_quote.c"
+        ],
+        "directory": "/home/tozaki/cursus/level3/minishell-dev/src/utils",
+        "file": "quote/ms_quote.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Iincludes",
+            "-I../libft",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-o",
+            "objs/error/print_error.o",
+            "error/print_error.c"
+        ],
+        "directory": "/home/tozaki/cursus/level3/minishell-dev/src/utils",
+        "file": "error/print_error.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Iincludes",
+            "-I../libft",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-o",
+            "objs/msmalloc/msmalloc.o",
+            "msmalloc/msmalloc.c"
+        ],
+        "directory": "/home/tozaki/cursus/level3/minishell-dev/src/utils",
+        "file": "msmalloc/msmalloc.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Iincludes",
+            "-I../libft",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-o",
+            "objs/list/intrusive_list.o",
+            "list/intrusive_list.c"
+        ],
+        "directory": "/home/tozaki/cursus/level3/minishell-dev/src/utils",
+        "file": "list/intrusive_list.c"
+    }
+]

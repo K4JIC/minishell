@@ -6,7 +6,7 @@
 /*   By: tozaki <tozaki@student.42.jp>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 14:48:52 by tozaki            #+#    #+#             */
-/*   Updated: 2026/03/05 16:01:15 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/03/09 14:29:52 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 // int	execute_one_simple_cmd(t_cmd cmd, char **envp)
 // {
-	// int	path_index;
+// 	int	path_index;
 
-	// cmd.pid = build_first_pipe(cmd);
-	// if (cmd.pid == 0)
-	// {
-	// }
-	// else
-	// {
-		// if (path_index = isaccessible(pathname, env_path))
-		// {
-			// pathname = cat_path_cmd("", cmd.name);
-			// if (!pathname)
-				// return (-1);
-			// execve(pathname, cmd.args, envp);
-		// }
-	// }
-	// return (0);
+// 	cmd.pid = build_first_pipe(cmd);
+// 	if (cmd.pid == 0)
+// 	{
+// 	}
+// 	else
+// 	{
+// 		if (path_index = isaccessible(pathname, env_path))
+// 		{
+// 			pathname = cat_path_cmd("", cmd.name);
+// 			if (!pathname)
+// 				return (-1);
+// 			execve(pathname, cmd.args, envp);
+// 		}
+// 	}
+// 	return (0);
 // }
 
 #include <stdio.h>
@@ -57,34 +57,74 @@ pid_t	fork_and_close_fd(int fd_in, int fd_out)
 	return (pid);
 }
 
-int	*build_pipe(int pipenum)
+int	do_parent(int fd[2], int *prev_in)
 {
-	int	i;
-	int	*fd;
+	if (fd[1])
+		close(fd[1]);
+	*prev_in = fd[0];
+	return (0);
+}
 
+int	do_child(int fd[2], int prev_in, t_cmd *cmd, char **envp)
+{
+	int		envnum;
+	char	*pathname;
+
+	dup2(prev_in, 0);
+	close(prev_in);
+	dup2(fd[1], 1);
+	close(fd[1]);
+	if (envnum = isaccessible(cmd->name, ))
+	{
+		pathname = cat_path_cmd();
+		execve();
+	}
+	free();
+	return (0);
+}
+
+int	*exec_pipe_processes(int pipenum, t_cmd cmd)
+{
+	int	fd[2];
+	int	prev_in;
+	int	*pids;
+	int	i;
+
+	pids = (int *)malloc(sizeof(int) * (pipenum + 1));
+	if (!pids)
+		return (NULL);
+	ft_bzero(fd, 2);
 	i = 0;
 	while (i < pipenum)
 	{
-		pipe();
+		if (pipe(fd) == -1)
+			return (NULL);
+		pids[i] = fork();
+		if (pids[i] != 0)
+			do_parent();
+		else
+			do_child();
+		i++;
 	}
+	return (pids);
 }
 
-int	execute_one_cmd(int pipenum, char **argv, char **envp)
-{
-	char	**args = {NULL};
-	int		pid;
-	char	*cmd;
+// int	execute_one_cmd(int pipenum, char **argv, char **envp)
+// {
+// 	char	**args = {NULL};
+// 	int		pid;
+// 	char	*cmd;
 
-	pid = -1;
-	if (pipenum)
-		pid = build_pipe();
-	if (pid == 0)
-		execute_one_cmd(pipenum - 1, argv, envp);
-	cmd = ft_strjoin("/usr/bin/", argv[pipenum + 1]);
-	execve(cmd, args, envp);
-	free(cmd);
-	return (0);
-}
+// 	pid = -1;
+// 	if (pipenum)
+// 		pid = build_pipe();
+// 	if (pid == 0)
+// 		execute_one_cmd(pipenum - 1, argv, envp);
+// 	cmd = ft_strjoin("/usr/bin/", argv[pipenum + 1]);
+// 	execve(cmd, args, envp);
+// 	free(cmd);
+// 	return (0);
+// }
 
 int	main(int argc, char **argv, char **envp)
 {
