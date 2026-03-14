@@ -25,6 +25,8 @@ typedef struct s_cmd
 }	t_cmd;
 
 int	do_parent(int id_c)
+{
+}
 
 int	recursive_pipe(int id_cmd, int num_cmds, int prev_in)
 {
