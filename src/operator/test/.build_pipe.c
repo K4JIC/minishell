@@ -2,9 +2,6 @@
 
 #include <stdio.h>
 
-int	do_child_process();
-
-int	do_parent_process();
 
 typedef struct s_cmds
 {

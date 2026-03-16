@@ -24,8 +24,12 @@ typedef struct s_cmd
 	char		**envp;
 }	t_cmd;
 
-int	do_parent(int id_c)
+int	do_parent(int id_cmd, int num_cmds, int prev_in, int fd[2], int wstatus)
 {
+	close(prev_in);
+	close(fd[1]);
+	recursive_pipe(id_cmd++, num_cmds, fd[0]);
+	waitpid(pid, &wstatus, 0);
 }
 
 int	recursive_pipe(int id_cmd, int num_cmds, int prev_in)
@@ -40,12 +44,7 @@ int	recursive_pipe(int id_cmd, int num_cmds, int prev_in)
 		return (-1);
 	pid = fork();
 	if (pid != 0)
-	{
-		close(prev_in);
-		close(fd[1]);
-		recursive_pipe(id_cmd++, num_cmds, fd[0]);
-		waitpid(pid, &wstatus, 0);
-	}
+		do_parent(id_cmd, num_cmds, prev_in, fd, wstatus);
 	if (pid == 0)
 	{
 		dup2(prev_in, STDIN_FILENO);
@@ -55,6 +54,64 @@ int	recursive_pipe(int id_cmd, int num_cmds, int prev_in)
 		close(fd[1]);
 	}
 	return (pid);
+}
+
+int	list_len(t_head_list *head)
+{
+	t_head_list	*curr;
+	int			i;
+
+	curr = head;
+	i = 0;
+	while (curr)
+	{
+		curr = curr->next;
+		i++;
+	}
+	return (i);
+}
+
+int	build_pipe_and_exec(t_cmd *head)
+{
+	int	pid;
+
+	pid = recursive_pipe(0, list_len((t_head_list *)head), 0);
+	if (pid == 0)
+	{
+		execve(head->name, head->args, head->envp);
+	}
+}
+#include <stdlib.h>
+
+t_cmd	*create_node(char *name, char **args, char **envp)
+{
+	t_cmd	*ret;
+
+	ret = malloc(sizeof(t_cmd));
+	ft_bzero(ret, sizeof(t_cmd));
+	ret->name = name;
+	ret->args = args;
+	ret->envp = envp;
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	t_cmd	*head;
+	t_cmd	*sec;
+	t_cmd	*thi;
+	char	**head_args = {"-l", NULL};
+	char	**sec_args = {"-l", NULL};
+	char	**thi_args = {"-l", NULL};
+
+	head = create_node("/usr/bin/ls", head_args, envp);
+	sec = create_node("/usr/bin/ls", sec_args, envp);
+	thi = create_node("/usr/bin/ls", thi_args, envp);
+	((t_head_list *)head)->next = (t_head_list *)sec;
+	((t_head_list *)sec)->next = (t_head_list *)thi;
+
+	build_pipe_and_exec(head);
+	(void)argc;
+	(void)argv;
 }
 
 // pid_t	build_first_pipe(int *prev_in)
