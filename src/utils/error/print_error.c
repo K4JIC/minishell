@@ -10,10 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "libft.h"
 
-int	print_error_msg(char *msg)
+static void	child_fatal(const char *msg, int *fds, size_t n)
 {
-	return (write(2, msg, ft_strlen(msg)));
+	size_t	i;
+
+	perror(msg);
+	while (i < n)
+	{
+		close()
+	}
 }

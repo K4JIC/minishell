@@ -12,15 +12,15 @@
 
 #include "tokenizer.h"
 
-static int	get_operator_len(char *s)
+static int	get_operator_len(char *p)
 {
-	if (ft_strncmp(";;s", s, 3) == 0)
+	if (ft_strncmp(";;s", p, 3) == 0)
 		return (3);
-	if (s[0] == s[1] && ft_strchr("&|;<>", s[0]))
+	if (p[0] == p[1] && ft_strchr("&|;<>", p[0]))
 		return (2);
-	if (ft_strncmp("|&", s, 2) == 0 || ft_strncmp(";&", s, 2) == 0)
+	if (ft_strncmp("|&", p, 2) == 0 || ft_strncmp(";&", p, 2) == 0)
 		return (2);
-	if (ft_strchr("&|;<>()=", s[0]))
+	if (ft_strchr("&|;<>()=", p[0]))
 		return (1);
 	return (NO_OPERATOR);
 }

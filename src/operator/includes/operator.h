@@ -37,10 +37,8 @@ typedef enum error
 }	t_error;
 
 // execute_command
-int	isaccessible(char *cmd_name, char menv_value);
+int	isaccessible(char *cmd_name, char menv_value, char *path_name);
 
-pid_t	build_first_pipe(int *prev_in);
-pid_t	build_pipe(void);
 
 // t_list	*envp_to_lst(char **envp);
 

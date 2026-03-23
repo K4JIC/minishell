@@ -1,0 +1,110 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Iincludes",
+      "-I../libft",
+      "-I../utils/includes",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-o",
+      "objs/utils/find_token.o",
+      "utils/find_token.c"
+    ],
+    "directory": "/home/k4jic/cursus/level3/minishell/src/frontend",
+    "file": "/home/k4jic/cursus/level3/minishell/src/frontend/utils/find_token.c",
+    "output": "/home/k4jic/cursus/level3/minishell/src/frontend/objs/utils/find_token.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Iincludes",
+      "-I../libft",
+      "-I../utils/includes",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-o",
+      "objs/utils/print_token.o",
+      "utils/print_token.c"
+    ],
+    "directory": "/home/k4jic/cursus/level3/minishell/src/frontend",
+    "file": "/home/k4jic/cursus/level3/minishell/src/frontend/utils/print_token.c",
+    "output": "/home/k4jic/cursus/level3/minishell/src/frontend/objs/utils/print_token.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Iincludes",
+      "-I../libft",
+      "-I../utils/includes",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-o",
+      "objs/utils/token_list.o",
+      "utils/token_list.c"
+    ],
+    "directory": "/home/k4jic/cursus/level3/minishell/src/frontend",
+    "file": "/home/k4jic/cursus/level3/minishell/src/frontend/utils/token_list.c",
+    "output": "/home/k4jic/cursus/level3/minishell/src/frontend/objs/utils/token_list.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Iincludes",
+      "-I../libft",
+      "-I../utils/includes",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-o",
+      "objs/lexer/laveling.o",
+      "lexer/laveling.c"
+    ],
+    "directory": "/home/k4jic/cursus/level3/minishell/src/frontend",
+    "file": "/home/k4jic/cursus/level3/minishell/src/frontend/lexer/laveling.c",
+    "output": "/home/k4jic/cursus/level3/minishell/src/frontend/objs/lexer/laveling.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Iincludes",
+      "-I../libft",
+      "-I../utils/includes",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-o",
+      "objs/lexer/tokenizer.o",
+      "lexer/tokenizer.c"
+    ],
+    "directory": "/home/k4jic/cursus/level3/minishell/src/frontend",
+    "file": "/home/k4jic/cursus/level3/minishell/src/frontend/lexer/tokenizer.c",
+    "output": "/home/k4jic/cursus/level3/minishell/src/frontend/objs/lexer/tokenizer.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Iincludes",
+      "-I../libft",
+      "-I../utils/includes",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-c",
+      "-o",
+      "objs/test/main.o",
+      "test/main.c"
+    ],
+    "directory": "/home/k4jic/cursus/level3/minishell/src/frontend",
+    "file": "/home/k4jic/cursus/level3/minishell/src/frontend/test/main.c",
+    "output": "/home/k4jic/cursus/level3/minishell/src/frontend/objs/test/main.o"
+  }
+]

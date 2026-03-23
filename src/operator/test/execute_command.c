@@ -67,10 +67,9 @@ char	*cat_path_cmd(char *path, char *cmd)
 
 // if pathname not executable, returns -1.
 // if executable, returns PATH (envval) index.
-int	isaccessible(char *cmd_name, char *env_value)
+int	isaccessible(char *cmd_name, char *env_value, char *path_name)
 {
 	char	**path_arr;
-	char	*path_name;
 	int		i;
 
 	path_arr = ft_split(env_value, ':');
@@ -84,7 +83,6 @@ int	isaccessible(char *cmd_name, char *env_value)
 			break ;
 		if (access(path_name, X_OK) == 0)
 		{
-			free(path_name);
 			free_sp(path_arr);
 			return (i);
 		}
