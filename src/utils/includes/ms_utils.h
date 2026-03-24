@@ -46,4 +46,9 @@ void	msfree(void *data_ptr);
 // alart error
 int		print_error_msg(char *msg);
 
+
+
+// other
+t_list	*envp_to_lst(char **envp);
+
 #endif

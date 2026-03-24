@@ -19,7 +19,8 @@ LIB     := libutils.a
 SRCDIRS := quote\
            list\
            msmalloc\
-           error
+           error\
+           envtolist
 
 SRC     := $(foreach dir,$(SRCDIRS),$(wildcard $(dir)/*.c))
 OBJDIR  := objs

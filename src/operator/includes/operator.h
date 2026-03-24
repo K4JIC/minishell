@@ -37,7 +37,7 @@ typedef enum error
 }	t_error;
 
 // execute_command
-int	isaccessible(char *cmd_name, char menv_value, char *path_name);
+int	isexecutable(char *cmd_name, char *env_value, char *path_name);
 
 
 // t_list	*envp_to_lst(char **envp);

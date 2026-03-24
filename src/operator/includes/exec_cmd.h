@@ -75,9 +75,11 @@ typedef struct s_cmd
 
 typedef struct s_cmd_exec
 {
-	t_cmd_type	type;
-	char		**args;
-	char		**envp;
+	t_cmd_type		type;
+	pid_t			pid;
+	int				exit_status;
+	char			**args;
+	char			**envp;
 }	t_cmd_exec;
 
 typedef struct s_cmd_redir
