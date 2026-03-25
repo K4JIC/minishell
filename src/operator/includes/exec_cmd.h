@@ -10,6 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ms_utils.h"
+#include "minishell.h"
+#include "libft.h"
+
 typedef enum
 {
 	WORD,
@@ -18,9 +22,9 @@ typedef enum
 
 typedef enum
 {
-	NO_QUOTE,
-	SINGLE_QUOTE,
-	DOUBLE_QUOTE
+	QUOTE_NONE,
+	QUOTE_SINGLE,
+	QUOTE_DOUBLE
 }	t_quote_type;
 
 typedef enum
@@ -78,6 +82,7 @@ typedef struct s_cmd_exec
 	t_cmd_type		type;
 	pid_t			pid;
 	int				exit_status;
+	char			*name;
 	char			**args;
 	char			**envp;
 }	t_cmd_exec;
@@ -111,3 +116,9 @@ typedef struct s_ms
 	t_token	*token_head;
 	char	**envp;
 }	t_ms;
+
+typedef struct s_env_set
+{
+	t_list	*env_list;
+	char	**envp;
+}	t_env_set;

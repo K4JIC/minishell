@@ -1,0 +1,66 @@
+[
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Iincludes",
+            "-I../libft",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-o",
+            "objs/msmalloc/msmalloc.o",
+            "msmalloc/msmalloc.c"
+        ],
+        "directory": "/home/tozaki/cursus/level3/minishell-dev/src/utils",
+        "file": "msmalloc/msmalloc.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Iincludes",
+            "-I../libft",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-o",
+            "objs/quote/ms_quote.o",
+            "quote/ms_quote.c"
+        ],
+        "directory": "/home/tozaki/cursus/level3/minishell-dev/src/utils",
+        "file": "quote/ms_quote.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Iincludes",
+            "-I../libft",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-o",
+            "objs/envtolist/envp_to_lst.o",
+            "envtolist/envp_to_lst.c"
+        ],
+        "directory": "/home/tozaki/cursus/level3/minishell-dev/src/utils",
+        "file": "envtolist/envp_to_lst.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Iincludes",
+            "-I../libft",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-o",
+            "objs/list/intrusive_list.o",
+            "list/intrusive_list.c"
+        ],
+        "directory": "/home/tozaki/cursus/level3/minishell-dev/src/utils",
+        "file": "list/intrusive_list.c"
+    }
+]
