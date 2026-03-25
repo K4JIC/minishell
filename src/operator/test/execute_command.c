@@ -67,7 +67,7 @@ char	*cat_path_cmd(char *path, char *cmd)
 
 // if pathname not executable, returns -1.
 // if executable, returns PATH (envval) index.
-int	isexecutable(char *cmd_name, char *env_value, char *path_name)
+int	isexecutable(char *cmd_name, char *env_value, char **path_name)
 {
 	char	**path_arr;
 	int		i;
