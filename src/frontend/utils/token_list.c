@@ -40,7 +40,7 @@ void	add_token_last(t_token *head, t_token *new_token)
 	t_head_list	*last_list;
 
 	last_list = get_last_node(&head->list);
-	new_token->id = ((t_token *)last_list)->id + 1;
+	// new_token->id = ((t_token *)last_list)->id + 1;
 	add_next_node(last_list, &new_token->list);
 }
 

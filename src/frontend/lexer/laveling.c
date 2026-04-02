@@ -12,24 +12,24 @@
 
 #include "tokenizer.h"
 
-t_token_type	distinguish_type(char *str)
+t_operator_type	distinguish_type(char *str)
 {
 	if (!str)
 		return (-1);
 	else if (ft_strncmp(">>", str, 2) == 0)
-		return (TOKEN_APPEND);
+		return (OP_REDIR_APP);
 	else if (ft_strncmp("<<", str, 2) == 0)
-		return (TOKEN_HEREDOC);
+		return (OP_REDIR_HDOC);
 	else if (str[0] == '<')
-		return (TOKEN_REDIR_IN);
+		return (OP_REDIR_IN);
 	else if (str[0] == '>')
-		return (TOKEN_REDIR_OUT);
+		return (OP_REDIR_OUT);
 	else if (str[0] == '|')
-		return (TK_PIPE);
+		return (OP_PIPE);
 	else if (str[0] == ';')
-		return (TK_LIST);
+		return (OP_LIST);
 	else
-		return (TK_WORD);
+		return (OP_NOT_IMPLIMENTED);
 }
 
 void	*set_one_op_lavel(void *token)
@@ -39,7 +39,7 @@ void	*set_one_op_lavel(void *token)
 	casted_token = (t_token *)token;
 	if (casted_token->type == TK_WORD)
 		return ((void *)1);
-	casted_token->type = distinguish_type(casted_token->str);
+	((t_token_operator *)casted_token)->op_type = distinguish_type(casted_token->str);
 	return ((void *)1);
 }
 

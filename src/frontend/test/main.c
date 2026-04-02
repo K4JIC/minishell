@@ -35,9 +35,9 @@ void	token_list_debug(void)
 	str1[3] = '\0';
 	str2[3] = '\0';
 	str3[3] = '\0';
-	fir = create_token(str1);
-	sec = create_token(str2);
-	thi = create_token(str3);
+	fir = create_token(str1, TK_WORD);
+	sec = create_token(str2, TK_WORD);
+	thi = create_token(str3, TK_WORD);
 	add_token_last(fir, sec);
 	add_token_last(fir, thi);
 	print_all_token(fir);
@@ -52,7 +52,7 @@ void	tokenizer_debug(char *s)
 
 	printf("line = %s\n", s);
 	head = tokenizer(s);
-	set_all_lavel(head);
+	set_all_op_lavel(head);
 	print_all_token(head);
 	free_all_token(head);
 	printf("--end--\n");
@@ -66,7 +66,7 @@ void	convert_cmd_debug(char *s)
 	t_minishell	ms;
 
 	tk_head = tokenizer(s);
-	set_all_lavel(tk_head);
+	set_all_op_lavel(tk_head);
 	convert_token_to_cmd(&ms, &cmd_head, tk_head);
 	print_all_cmd(cmd_head);
 	// free_all_cmd(cmd_head);
@@ -77,7 +77,7 @@ void	convert_cmd_debug(char *s)
 int	main(void)
 {
 	char	*s = "aaa bbb 'aaa bbb'<< ccc|ddd>outputs/log";
-	char	*s2 = "ls ; ps -e | grep bash > out";
+	char	*s2 = "ls ; ps -e \\| grep bash > out";
 	char	*s3 = "ls ; ps -e \"|\" grep bash > out";
 
 	token_list_debug();

@@ -13,17 +13,17 @@
 #include "tokenizer.h"
 
 int	store_one_token(t_token **head,
-		char *p, unsigned int start, size_t token_len)
+		char *p, unsigned int start, t_token_type_len token_len)
 {
 	char	*str;
 	t_token	*new_token;
 
-	if (!token_len)
+	if (!token_len.len)
 		return (FAILURE);
-	str = ft_substr(p, start, token_len);
+	str = ft_substr(p, start, token_len.len);
 	if (!str)
 		return (FAILURE);
-	new_token = create_token(str);
+	new_token = create_token(str, token_len.type);
 	if (!new_token)
 	{
 		free(str);
@@ -38,9 +38,9 @@ int	store_one_token(t_token **head,
 
 t_token	*tokenizer(char *p)
 {
-	t_token	*head;
-	int		i;
-	int		len;
+	t_token				*head;
+	int					i;
+	t_token_type_len	tlen;
 
 	head = NULL;
 	i = 0;
@@ -50,15 +50,15 @@ t_token	*tokenizer(char *p)
 			i++;
 		if (!p[i])
 			break ;
-		len = get_one_token_len(&(p[i]));
-		if (len < 0 || store_one_token(&head, p, i, len) == FAILURE)
+		tlen = get_one_token_len(&(p[i]));
+		if (tlen.len < 0 || store_one_token(&head, p, i, tlen) == FAILURE)
 		{
-			if (len == NO_CLOSE_QUOTE)
+			if (tlen.len == NO_CLOSE_QUOTE)
 				ft_putstr_fd("No end of quote\n", 2);
 			free_all_token(head);
 			return (NULL);
 		}
-		i += len;
+		i += tlen.len;
 	}
 	return (head);
 }

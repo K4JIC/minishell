@@ -37,10 +37,8 @@ typedef enum
 	OP_REDIR_OUT,
 	OP_REDIR_APP,
 	OP_REDIR_HDOC,
-	OP_AND,
-	OP_OR,
-	OP_LPAREN,
-	OP_RPAREN
+	OP_NOT_IMPLIMENTED,
+	NO_OP
 }	t_operator_type;
 
 // parent class of word and operator
@@ -60,6 +58,12 @@ typedef struct s_token_word
 	t_quote_type	wd_quote;
 	int				wd_assignment;
 }	t_token_word;
+
+typedef struct s_token_type_len
+{
+	int				len;
+	t_token_type	type;
+}	t_token_type_len;
 
 typedef struct s_token_operator
 {
@@ -101,8 +105,8 @@ void		*print_token(void *token);
 void		print_all_token(t_token *head);
 
 // find token
-int		get_one_token_len(char *p);
-t_token	*tokenizer(char *p);
-void	set_all_lavel(t_token *head);
+t_token_type_len	get_one_token_len(char *p);
+t_token				*tokenizer(char *p);
+void				set_all_op_lavel(t_token *head);
 
 #endif

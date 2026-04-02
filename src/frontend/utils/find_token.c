@@ -22,7 +22,7 @@ static int	get_operator_len(char *p)
 		return (2);
 	if (ft_strchr("&|;<>()=", p[0]))
 		return (1);
-	return (NO_OPERATOR);
+	return (0);
 }
 
 static int	get_word_len(char *p)
@@ -33,7 +33,9 @@ static int	get_word_len(char *p)
 	len = 0;
 	while (p[len] && !ismeta(p[len]) && !ismsspace(p[len]))
 	{
-		if (isquote(p[len]))
+		if (p[len] == '\\' && p[len + 1] != 0)
+			len += 2;
+		else if (isquote(p[len]))
 		{
 			quote_len = get_quoted_string_len(&p[len]);
 			if (quote_len == NO_CLOSE_QUOTE)
@@ -46,15 +48,20 @@ static int	get_word_len(char *p)
 	return (len);
 }
 
-int	get_one_token_len(char *p)
+t_token_type_len	get_one_token_len(char *p)
 {
-	int		len;
+	t_token_type_len		tlen;
 
-	if (!*p)
-		return (0);
-	else if (ismeta(*p))
-		len = get_operator_len(p);
+	ft_bzero(&tlen, sizeof(t_token_type_len));
+	if (ismeta(*p))
+	{
+		tlen.type = TK_OPERATOR;
+		tlen.len = get_operator_len(p);
+	}
 	else
-		len = get_word_len(p);
-	return (len);
+	{
+		tlen.type = TK_WORD;
+		tlen.len = get_word_len(p);
+	}
+	return (tlen);
 }

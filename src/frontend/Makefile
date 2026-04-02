@@ -23,6 +23,7 @@ endif
 # Source directories (追加する場合はここに追記)
 SRCDIRS := utils\
 		   lexer\
+		   parser\
 		   test
 
 # Collect source files and map them to objs/.../*.o preserving directory layout

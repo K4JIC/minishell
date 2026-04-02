@@ -18,8 +18,7 @@ void	*print_token(void *token)
 	t_token	*casted_token;
 
 	casted_token = (t_token *)token;
-	ft_printf("id = %2d, type = %2d, str = %s\n",
-		casted_token->id, casted_token->type, casted_token->str);
+	ft_printf("type = %2d, str = %s\n", casted_token->type, casted_token->str);
 	return (token);
 }
 
