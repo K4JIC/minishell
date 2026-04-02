@@ -82,5 +82,11 @@ typedef struct s_minishell{
 }t_minishell;
 
 t_list	*envp_to_lst(char **envp);
+t_env	*find_env(t_list *env_list, char *key);
+int		set_env(t_list **env_list, char *key, char *value);
+int		remove_env(t_list **env_list, char *key);
+void	free_env_content(t_env *env);
+int		print_export(t_list *env_list);
+int		is_valid_identifier(char *str);
 
 #endif
