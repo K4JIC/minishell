@@ -25,21 +25,25 @@ t_token_type	distinguish_type(char *str)
 	else if (str[0] == '>')
 		return (TOKEN_REDIR_OUT);
 	else if (str[0] == '|')
-		return (PIPE);
+		return (TK_PIPE);
+	else if (str[0] == ';')
+		return (TK_LIST);
 	else
-		return (WORD);
+		return (TK_WORD);
 }
 
-void	*set_one_lavel(void *token)
+void	*set_one_op_lavel(void *token)
 {
 	t_token	*casted_token;
 
 	casted_token = (t_token *)token;
+	if (casted_token->type == TK_WORD)
+		return ((void *)1);
 	casted_token->type = distinguish_type(casted_token->str);
 	return ((void *)1);
 }
 
-void	set_all_lavel(t_token *head)
+void	set_all_op_lavel(t_token *head)
 {
-	apply_func((t_head_list *)head, set_one_lavel);
+	apply_func((t_head_list *)head, set_one_op_lavel);
 }

@@ -1,110 +1,62 @@
 [
   {
+    "file": "lexer/separate_token.c",
     "arguments": [
-      "/usr/bin/cc",
+      "cc",
       "-Iincludes",
       "-I../libft",
       "-I../utils/includes",
       "-Wall",
       "-Wextra",
       "-Werror",
+      "-MMD",
+      "-MP",
       "-c",
+      "lexer/separate_token.c",
       "-o",
-      "objs/utils/find_token.o",
-      "utils/find_token.c"
+      "objs/lexer/separate_token.o"
     ],
-    "directory": "/home/k4jic/cursus/level3/minishell/src/frontend",
-    "file": "/home/k4jic/cursus/level3/minishell/src/frontend/utils/find_token.c",
-    "output": "/home/k4jic/cursus/level3/minishell/src/frontend/objs/utils/find_token.o"
+    "directory": "/home/tozaki/cursus/milestone3/minishell/src/frontend",
+    "output": "objs/lexer/separate_token.o"
   },
   {
+    "file": "lexer/tokenizer.c",
     "arguments": [
-      "/usr/bin/cc",
+      "cc",
       "-Iincludes",
       "-I../libft",
       "-I../utils/includes",
       "-Wall",
       "-Wextra",
       "-Werror",
+      "-MMD",
+      "-MP",
       "-c",
+      "lexer/tokenizer.c",
       "-o",
-      "objs/utils/print_token.o",
-      "utils/print_token.c"
+      "objs/lexer/tokenizer.o"
     ],
-    "directory": "/home/k4jic/cursus/level3/minishell/src/frontend",
-    "file": "/home/k4jic/cursus/level3/minishell/src/frontend/utils/print_token.c",
-    "output": "/home/k4jic/cursus/level3/minishell/src/frontend/objs/utils/print_token.o"
+    "directory": "/home/tozaki/cursus/milestone3/minishell/src/frontend",
+    "output": "objs/lexer/tokenizer.o"
   },
   {
+    "file": "test/main.c",
     "arguments": [
-      "/usr/bin/cc",
+      "cc",
       "-Iincludes",
       "-I../libft",
       "-I../utils/includes",
       "-Wall",
       "-Wextra",
       "-Werror",
+      "-MMD",
+      "-MP",
       "-c",
+      "test/main.c",
       "-o",
-      "objs/utils/token_list.o",
-      "utils/token_list.c"
+      "objs/test/main.o"
     ],
-    "directory": "/home/k4jic/cursus/level3/minishell/src/frontend",
-    "file": "/home/k4jic/cursus/level3/minishell/src/frontend/utils/token_list.c",
-    "output": "/home/k4jic/cursus/level3/minishell/src/frontend/objs/utils/token_list.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/cc",
-      "-Iincludes",
-      "-I../libft",
-      "-I../utils/includes",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-c",
-      "-o",
-      "objs/lexer/laveling.o",
-      "lexer/laveling.c"
-    ],
-    "directory": "/home/k4jic/cursus/level3/minishell/src/frontend",
-    "file": "/home/k4jic/cursus/level3/minishell/src/frontend/lexer/laveling.c",
-    "output": "/home/k4jic/cursus/level3/minishell/src/frontend/objs/lexer/laveling.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/cc",
-      "-Iincludes",
-      "-I../libft",
-      "-I../utils/includes",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-c",
-      "-o",
-      "objs/lexer/tokenizer.o",
-      "lexer/tokenizer.c"
-    ],
-    "directory": "/home/k4jic/cursus/level3/minishell/src/frontend",
-    "file": "/home/k4jic/cursus/level3/minishell/src/frontend/lexer/tokenizer.c",
-    "output": "/home/k4jic/cursus/level3/minishell/src/frontend/objs/lexer/tokenizer.o"
-  },
-  {
-    "arguments": [
-      "/usr/bin/cc",
-      "-Iincludes",
-      "-I../libft",
-      "-I../utils/includes",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-c",
-      "-o",
-      "objs/test/main.o",
-      "test/main.c"
-    ],
-    "directory": "/home/k4jic/cursus/level3/minishell/src/frontend",
-    "file": "/home/k4jic/cursus/level3/minishell/src/frontend/test/main.c",
-    "output": "/home/k4jic/cursus/level3/minishell/src/frontend/objs/test/main.o"
+    "directory": "/home/tozaki/cursus/milestone3/minishell/src/frontend",
+    "output": "objs/test/main.o"
   }
 ]

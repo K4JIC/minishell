@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "tokenizer.h"
+#include "minishell.h"
 #include <stdlib.h>
 #include <strings.h>
 #include <stdio.h>
@@ -57,15 +58,33 @@ void	tokenizer_debug(char *s)
 	printf("--end--\n");
 }
 
+void	convert_cmd_debug(char *s)
+{
+	printf("--parser_debug--\n");
+	t_token	*tk_head = NULL;
+	t_cmd	*cmd_head = NULL;
+	t_minishell	ms;
+
+	tk_head = tokenizer(s);
+	set_all_lavel(tk_head);
+	convert_token_to_cmd(&ms, &cmd_head, tk_head);
+	print_all_cmd(cmd_head);
+	// free_all_cmd(cmd_head);
+	printf("--end--\n");
+}
+
 #ifdef DEBUG
 int	main(void)
 {
 	char	*s = "aaa bbb 'aaa bbb'<< ccc|ddd>outputs/log";
-	char	*s2 = "aaa bbb 'aaa 'bbb<< ccc|ddd>outputs/log";
+	char	*s2 = "ls ; ps -e | grep bash > out";
+	char	*s3 = "ls ; ps -e \"|\" grep bash > out";
 
 	token_list_debug();
 	tokenizer_debug(s);
 	tokenizer_debug(s2);
+	convert_cmd_debug(s2);
+	convert_cmd_debug(s3);
 	return (0);
 }
 #endif

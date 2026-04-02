@@ -15,15 +15,22 @@
 #include <stdlib.h>
 
 // specialized func
-t_token	*create_token(char *str)
+t_token	*create_token(char *str, t_token_type type)
 {
 	t_token	*new_token;
 
-	new_token = malloc(sizeof(t_token));
+	if (type != TK_WORD && type != TK_OPERATOR)
+		return (NULL);
+	new_token = NULL;
+	if (type == TK_WORD)
+		new_token = ft_calloc(sizeof(t_token_word), 1);
+	else if (type == TK_OPERATOR)
+		new_token = ft_calloc(sizeof(t_token_operator), 1);
 	if (!new_token)
 		return (NULL);
 	ft_bzero(new_token, sizeof(t_token));
 	new_token->str = str;
+	new_token->type = type;
 	return (new_token);
 }
 

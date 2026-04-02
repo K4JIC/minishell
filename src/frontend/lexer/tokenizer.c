@@ -54,7 +54,7 @@ t_token	*tokenizer(char *p)
 		if (len < 0 || store_one_token(&head, p, i, len) == FAILURE)
 		{
 			if (len == NO_CLOSE_QUOTE)
-				print_error_msg("No end of quote\n");
+				ft_putstr_fd("No end of quote\n", 2);
 			free_all_token(head);
 			return (NULL);
 		}
