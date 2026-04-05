@@ -20,9 +20,11 @@ int	frontend(char *input, t_minishell *ms, t_cmd_lst *cmd)
 	ft_printf("--cmd--\n");
 	print_all_cmd(cmd_head);
 	ft_printf("--end--\n");
+	// t_cmd 構造体を格納
 	ms->cmd_list = cmd_head;
 	if (ms->cmd_list->type == CMD_EXEC)
 	{
+		// t_cmd_lst 構造体を格納
 		cmd->args = ((t_cmd_exec *)ms->cmd_list)->args;
 	}
 	return (SUCCESS);
