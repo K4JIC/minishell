@@ -7,7 +7,15 @@ OBJS_DIR	= obj
 INC_DIR		= include
 LIBFT_DIR	= src/libft
 
-SRCS	= $(SRCS_DIR)/main.c
+SRCS	=	$(SRCS_DIR)/main.c\
+			$(SRCS_DIR)/frontend/frontend.c\
+			$(SRCS_DIR)/frontend/lexer/lavel_token.c\
+			$(SRCS_DIR)/frontend/lexer/tokenizer.c\
+			$(SRCS_DIR)/frontend/parser/print_cmds.c\
+			$(SRCS_DIR)/frontend/parser/separate_token.c\
+			$(SRCS_DIR)/frontend/utils/find_token.c\
+			$(SRCS_DIR)/frontend/utils/print_token.c\
+			$(SRCS_DIR)/frontend/utils/token_list.c
 OBJS	= $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
 LIBFT	= $(LIBFT_DIR)/libft.a
 

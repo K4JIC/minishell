@@ -14,7 +14,7 @@
 # define SKIP -1
 
 /*
- * The third argument to the main function,char **envp, 
+ * The third argument to the main function,char **envp,
  * is managed as a structure to facilitate adding and removing elements.
 */
 typedef struct s_env{
@@ -57,7 +57,7 @@ typedef struct s_token{
 }t_token;
 
 /*
- * After parsing the token, 
+ * After parsing the token,
  * the struct of "pipe-separated command(processing) units"
  * that is finally passed to the execve function or pipe processing.
  */
