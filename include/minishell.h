@@ -3,11 +3,15 @@
 
 # include <stddef.h>
 # include <stdlib.h>
+# include <stdio.h>
 # include <unistd.h>
 # include <stdbool.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "libft.h"
+# include "token.h"
+# include "cmd.h"
+# include "ms_utils.h"
 
 # define SUCCESS 0
 # define FAILURE 1
@@ -36,39 +40,18 @@ typedef struct s_redirect{
 }t_redirect;
 
 /*
- * The struct for storing command strings entered by a user
- * in a shell when they are broken down into "tokens" to make them easier
- * for programs to handle.
-*/
-typedef enum e_token_type{
-	WORD,
-	PIPE,
-	TOKEN_REDIR_IN,
-	TOKEN_REDIR_OUT,
-	TOKEN_APPEND,
-	TOKEN_HEREDOC
-}t_token_type;
-
-typedef struct s_token{
-	char			*str;
-	t_token_type	type;
-	struct s_token	*next;
-	struct s_token	*prev;
-}t_token;
-
-/*
  * After parsing the token,
  * the struct of "pipe-separated command(processing) units"
  * that is finally passed to the execve function or pipe processing.
  */
-typedef struct s_cmd{
-	char			**args;
-	t_list			*redirects;
-	int				pid;
-	struct s_cmd	*next;
-	int				fd_in;
-	int				fd_out;
-}t_cmd;
+typedef struct s_cmd_lst{
+	char				**args;
+	t_list				*redirects;
+	int					pid;
+	struct s_cmd_lst	*next;
+	int					fd_in;
+	int					fd_out;
+}t_cmd_lst;
 
 //The master structure that controls everything
 typedef struct s_minishell{
@@ -82,5 +65,9 @@ typedef struct s_minishell{
 }t_minishell;
 
 t_list	*envp_to_lst(char **envp);
+
+int		frontend(char *input, t_minishell *ms);
+int		convert_token_to_cmd(t_minishell *sh, t_cmd **parent, t_token *head);
+void	print_all_cmd(t_cmd *cmd);
 
 #endif

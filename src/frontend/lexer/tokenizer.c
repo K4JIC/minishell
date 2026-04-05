@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "token.h"
+#include "minishell.h"
 
 int	store_one_token(t_token **head,
 		char *p, unsigned int start, t_token_type_len token_len)

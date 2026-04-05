@@ -77,5 +77,6 @@ typedef struct s_env_set
 	char	**envp;
 }	t_env_set;
 
+void	print_all_cmd(t_cmd *cmd);
 
 #endif

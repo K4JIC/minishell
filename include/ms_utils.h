@@ -27,6 +27,7 @@ typedef struct s_head_list
 // intrusive_list
 void		add_next_node(t_head_list *prev_list, t_head_list *next_list);
 t_head_list	*get_last_node(t_head_list *head);
+int			list_len(t_head_list *head);
 int			apply_func(t_head_list *head, void *(*f)(void *));
 
 // ms_quote

@@ -29,6 +29,22 @@ t_head_list	*get_last_node(t_head_list *head)
 	return (curr);
 }
 
+int	list_len(t_head_list *head)
+{
+	t_head_list	*curr;
+	int			i;
+
+	curr = head;
+	i = 0;
+	while (curr)
+	{
+		curr = curr->next;
+		i++;
+	}
+	return (i);
+}
+
+
 int	apply_func(t_head_list *head, void *(*f)(void *))
 {
 	t_head_list	*curr;

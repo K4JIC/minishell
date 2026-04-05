@@ -30,7 +30,7 @@ $(LIBFT):
 	make -C $(LIBFT_DIR)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
-	mkdir -p $(OBJS_DIR)
+	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -I$(INC_DIR) -I$(LIBFT_DIR) -c $< -o $@
 
 clean:
