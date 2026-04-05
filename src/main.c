@@ -4,6 +4,7 @@ int	main(void)
 {
 	char 		*input;
 	t_minishell	ms;
+	t_cmd_lst	cmd;
 
 	while (1)
 	{
@@ -14,7 +15,8 @@ int	main(void)
 			add_history(input);//入力文字列を保存する、↑でコマンドを再利用できるようにする
 		ft_printf("入力値: %s\n", input);
 		ft_bzero(&ms, sizeof(t_minishell));
-		if (frontend(input, &ms) == FAILURE)
+		ft_bzero(&cmd, sizeof(t_cmd_lst));
+		if (frontend(input, &ms, &cmd) == FAILURE)
 			ft_printf("an error occured in frontend\n");
 		free(input);
 	}

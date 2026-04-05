@@ -15,7 +15,11 @@ SRCS	=	$(SRCS_DIR)/main.c\
 			$(SRCS_DIR)/frontend/parser/separate_token.c\
 			$(SRCS_DIR)/frontend/utils/find_token.c\
 			$(SRCS_DIR)/frontend/utils/print_token.c\
-			$(SRCS_DIR)/frontend/utils/token_list.c
+			$(SRCS_DIR)/frontend/utils/token_list.c\
+			$(SRCS_DIR)/envlst/envp_to_lst.c\
+			$(SRCS_DIR)/utils/list/intrusive_list.c\
+			$(SRCS_DIR)/utils/msmalloc/msmalloc.c\
+			$(SRCS_DIR)/utils/quote/ms_quote.c
 OBJS	= $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
 LIBFT	= $(LIBFT_DIR)/libft.a
 

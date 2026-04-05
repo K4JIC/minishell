@@ -66,7 +66,7 @@ typedef struct s_minishell{
 
 t_list	*envp_to_lst(char **envp);
 
-int		frontend(char *input, t_minishell *ms);
+int		frontend(char *input, t_minishell *ms, t_cmd_lst *cmd);
 int		convert_token_to_cmd(t_minishell *sh, t_cmd **parent, t_token *head);
 void	print_all_cmd(t_cmd *cmd);
 

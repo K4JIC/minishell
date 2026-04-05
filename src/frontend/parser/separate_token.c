@@ -66,7 +66,7 @@ t_cmd	*convert_token_to_cmd_exec(t_token *head)
 		return (NULL);
 	cmd_e->type = CMD_EXEC;
 	cmd_e->name = head->str;
-	curr = ((t_head_list *)head)->next;
+	curr = ((t_head_list *)head);
 	listlen = list_len(curr);
 	i = 0;
 	cmd_e->args = ft_calloc(sizeof(char *), listlen + 1);
