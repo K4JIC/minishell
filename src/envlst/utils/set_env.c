@@ -8,8 +8,11 @@ static t_env	*create_env(char *key, char *value)
 	if (!env)
 		return (NULL);
 	env->key = ft_strdup(key);
-	env->value = ft_strdup(value);
-	if (!env->key || !env->value)
+	if (value)
+		env->value = ft_strdup(value);
+	else
+		env->value = NULL;
+	if (!env->key || (value && !env->value))
 	{
 		free_env_content(env);
 		return (NULL);
@@ -43,8 +46,11 @@ int	set_env(t_list **env_list, char *key, char *value)
 	env = find_env(*env_list, key);
 	if (env)
 	{
-		new_value = ft_strdup(value);
-		if (!new_value)
+		if (value)
+			new_value = ft_strdup(value);
+		else
+			new_value = NULL;
+		if (value && !new_value)
 			return (FAILURE);
 		free(env->value);
 		env->value = new_value;

@@ -7,14 +7,14 @@ static char	*get_cd_path(t_cmd *cmd, t_list *env_list)
 	if (cmd->args[1] == NULL)
 	{
 		env = find_env(env_list, "HOME");
-		if (!env)
+		if (!env || !env->value)
 			return (ft_putstr_fd("cd: HOME not set\n", 2), NULL);
 		return (env->value);
 	}
 	if (cmd->args[1][0] == '-' && cmd->args[1][1] != '\0')
 	{
 		env = find_env(env_list, "OLDPWD");
-		if (!env)
+		if (!env || !env->value)
 			return (ft_putstr_fd("cd: OLDPWD not set\n", 2), NULL);
 		ft_putstr_fd(env->value, 1);
 		write(1, "\n", 1);
