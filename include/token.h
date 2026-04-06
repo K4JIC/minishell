@@ -95,6 +95,6 @@ void		print_all_token(t_token *head);
 // find token
 t_token_type_len	get_one_token_len(char *p);
 t_token				*convert_line_to_token(char *p);
-void				set_all_op_lavel(t_token *head);
+void				set_all_op_label(t_token *head);
 
 #endif

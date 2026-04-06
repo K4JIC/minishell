@@ -9,7 +9,7 @@ LIBFT_DIR	= src/libft
 
 SRCS	=	$(SRCS_DIR)/main.c\
 			$(SRCS_DIR)/frontend/frontend.c\
-			$(SRCS_DIR)/frontend/lexer/lavel_token.c\
+			$(SRCS_DIR)/frontend/lexer/label_token.c\
 			$(SRCS_DIR)/frontend/lexer/tokenizer.c\
 			$(SRCS_DIR)/frontend/parser/print_cmds.c\
 			$(SRCS_DIR)/frontend/parser/separate_token.c\
@@ -18,7 +18,7 @@ SRCS	=	$(SRCS_DIR)/main.c\
 			$(SRCS_DIR)/frontend/utils/token_list.c\
 			$(SRCS_DIR)/envlst/envp_to_lst.c\
 			$(SRCS_DIR)/utils/list/intrusive_list.c\
-			$(SRCS_DIR)/utils/msmalloc/msmalloc.c\
+			$(SRCS_DIR)/utils/msmalloc/ms_malloc.c\
 			$(SRCS_DIR)/utils/quote/ms_quote.c
 OBJS	= $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
 LIBFT	= $(LIBFT_DIR)/libft.a

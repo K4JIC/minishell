@@ -9,7 +9,7 @@ int	frontend(char *input, t_minishell *ms, t_cmd_lst *cmd)
 	tk_head = convert_line_to_token(input);
 	if (tk_head == NULL)
 		return (FAILURE);
-	set_all_op_lavel(tk_head);
+	set_all_op_label(tk_head);
 	ft_printf("--token--\n");
 	print_all_token(tk_head);
 	ft_printf("--end--\n");

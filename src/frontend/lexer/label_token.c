@@ -32,7 +32,7 @@ t_operator_type	distinguish_op_type(char *str)
 		return (OP_NOT_IMPLIMENTED);
 }
 
-void	*set_one_op_lavel(void *token)
+void	*set_one_op_label(void *token)
 {
 	t_token	*casted_token;
 
@@ -43,7 +43,7 @@ void	*set_one_op_lavel(void *token)
 	return ((void *)1);
 }
 
-void	set_all_op_lavel(t_token *head)
+void	set_all_op_label(t_token *head)
 {
-	apply_func((t_head_list *)head, set_one_op_lavel);
+	apply_func((t_head_list *)head, set_one_op_label);
 }
