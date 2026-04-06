@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operate_list.h                                     :+:      :+:    :+:   */
+/*   ms_utils.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tozaki <tozaki@student.42.jp>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 23:02:08 by tozaki            #+#    #+#             */
-/*   Updated: 2026/02/28 18:14:24 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/04/06 23:11:41 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ typedef struct s_head_list
 	struct s_head_list	*next;
 }	t_head_list;
 
-#define NO_QUOTE -1
-#define NO_CLOSE_QUOTE -2
+# define NO_QUOTE -1
+# define NO_CLOSE_QUOTE -2
 
 // intrusive_list
 void		add_next_node(t_head_list *prev_list, t_head_list *next_list);

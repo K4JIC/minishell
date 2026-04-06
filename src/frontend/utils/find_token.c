@@ -14,8 +14,6 @@
 
 static int	get_operator_len(char *p)
 {
-	if (ft_strncmp(";;s", p, 3) == 0)
-		return (3);
 	if (p[0] == p[1] && ft_strchr("&|;<>", p[0]))
 		return (2);
 	if (ft_strncmp("|&", p, 2) == 0 || ft_strncmp(";&", p, 2) == 0)

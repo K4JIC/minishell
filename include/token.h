@@ -36,7 +36,7 @@ typedef enum
 	OP_REDIR_OUT,
 	OP_REDIR_APP,
 	OP_REDIR_HDOC,
-	OP_NOT_IMPLIMENTED,
+	OP_NOT_IMPLEMENTED,
 	NO_OP
 }	t_operator_type;
 
