@@ -54,7 +54,7 @@ void	syntax_error(char *msg, t_minishell *sh)
 		sh->syntax_error = 1;
 }
 
-t_cmd	*convert_token_to_cmd_exec(t_token *head)
+t_cmd_base	*convert_token_to_cmd_exec(t_token *head)
 {
 	t_cmd_exec	*cmd_e;
 	t_head_list	*curr;
@@ -79,12 +79,12 @@ t_cmd	*convert_token_to_cmd_exec(t_token *head)
 		i++;
 	}
 	cmd_e->args[i] = NULL;
-	return ((t_cmd *)cmd_e);
+	return ((t_cmd_base *)cmd_e);
 }
 
-t_cmd	*create_cmd_btree_node(t_operator_type type)
+t_cmd_base	*create_cmd_btree_node(t_operator_type type)
 {
-	t_cmd	*ret;
+	t_cmd_base	*ret;
 
 	if (type == OP_PIPE)
 	{
@@ -102,10 +102,10 @@ t_cmd	*create_cmd_btree_node(t_operator_type type)
 	}
 	else
 		return (NULL);
-	return ((t_cmd *)ret);
+	return ((t_cmd_base *)ret);
 }
 
-int	convert_token_to_cmd(t_minishell *sh, t_cmd **parent, t_token *head)
+int	convert_token_to_cmd(t_minishell *sh, t_cmd_base **parent, t_token *head)
 {
 	t_token_lr	lr;
 	int			ret;

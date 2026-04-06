@@ -44,14 +44,14 @@ typedef struct s_redirect{
  * the struct of "pipe-separated command(processing) units"
  * that is finally passed to the execve function or pipe processing.
  */
-typedef struct s_cmd_lst{
+typedef struct s_cmd{
 	char				**args;
 	t_list				*redirects;
 	int					pid;
 	struct s_cmd_lst	*next;
 	int					fd_in;
 	int					fd_out;
-}t_cmd_lst;
+}t_cmd;
 
 //The master structure that controls everything
 typedef struct s_minishell{
@@ -66,8 +66,8 @@ typedef struct s_minishell{
 
 t_list	*envp_to_lst(char **envp);
 
-int		frontend(char *input, t_minishell *ms, t_cmd_lst *cmd);
-int		convert_token_to_cmd(t_minishell *sh, t_cmd **parent, t_token *head);
-void	print_all_cmd(t_cmd *cmd);
+int		frontend(char *input, t_minishell *ms);
+int		convert_token_to_cmd(t_minishell *sh, t_cmd_base **parent, t_token *head);
+void	print_all_cmd(t_cmd_base *cmd);
 
 #endif

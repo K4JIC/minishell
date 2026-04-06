@@ -1,9 +1,9 @@
 #include "minishell.h"
 
-int	frontend(char *input, t_minishell *ms, t_cmd_lst *cmd)
+int	frontend(char *input, t_minishell *ms)
 {
 	t_token		*tk_head;
-	t_cmd		*cmd_head;
+	t_cmd_base	*cmd_head;
 	int			ret;
 
 	tk_head = convert_line_to_token(input);
@@ -20,12 +20,9 @@ int	frontend(char *input, t_minishell *ms, t_cmd_lst *cmd)
 	ft_printf("--cmd--\n");
 	print_all_cmd(cmd_head);
 	ft_printf("--end--\n");
-	// t_cmd 構造体を格納
-	ms->cmd_list = cmd_head;
-	if (ms->cmd_list->type == CMD_EXEC)
+	if (cmd_head->type == CMD_EXEC)
 	{
-		// t_cmd_lst 構造体を格納
-		cmd->args = ((t_cmd_exec *)ms->cmd_list)->args;
+		ms->cmd_list->args = ((t_cmd_exec *)cmd_head)->args;
 	}
 	return (SUCCESS);
 }

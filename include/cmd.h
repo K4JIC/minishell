@@ -25,10 +25,10 @@ typedef enum
 
 // parent class of all t_cmd_ structures
 // binary tree structure
-typedef struct s_cmd
+typedef struct s_cmd_base
 {
 	t_cmd_type	type;
-}	t_cmd;
+}	t_cmd_base;
 
 typedef struct s_cmd_exec
 {
@@ -43,7 +43,7 @@ typedef struct s_cmd_exec
 typedef struct s_cmd_redir
 {
 	t_cmd_type	type;
-	t_cmd		*cmd_head;
+	t_cmd_base	*cmd_head;
 	char		*filename;
 	int			mode;
 	int			fd;
@@ -52,23 +52,23 @@ typedef struct s_cmd_redir
 typedef struct s_cmd_btree
 {
 	t_cmd_type	type;
-	t_cmd		*left;
-	t_cmd		*right;
+	t_cmd_base	*left;
+	t_cmd_base	*right;
 }	t_cmd_btree;
 
 typedef struct s_cmd_pipe
 {
 	t_cmd_type	type;
-	t_cmd		*left;
-	t_cmd		*right;
+	t_cmd_base	*left;
+	t_cmd_base	*right;
 	int			pipenum;
 }	t_cmd_pipe;
 
 typedef struct s_cmd_list
 {
 	t_cmd_type	type;
-	t_cmd		*left;
-	t_cmd		*right;
+	t_cmd_base	*left;
+	t_cmd_base	*right;
 }	t_cmd_list;
 
 typedef struct s_env_set

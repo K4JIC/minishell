@@ -1,7 +1,7 @@
 #include "minishell.h"
 #include "cmd.h"
 
-void	print_all_cmd_helper(t_cmd *cmd, int depth, int is_last)
+void	print_all_cmd_helper(t_cmd_base *cmd, int depth, int is_last)
 {
 	int	i;
 
@@ -50,7 +50,7 @@ void	print_all_cmd_helper(t_cmd *cmd, int depth, int is_last)
 	}
 }
 
-void	print_all_cmd(t_cmd *cmd)
+void	print_all_cmd(t_cmd_base *cmd)
 {
 	if (cmd == NULL)
 		return ;
