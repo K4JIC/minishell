@@ -57,5 +57,7 @@ void	*free_token(void *token)
 
 void	free_all_token(t_token *head)
 {
+	if (head == NULL)
+		return ;
 	apply_func(&head->list, free_token);
 }
