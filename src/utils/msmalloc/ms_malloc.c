@@ -21,7 +21,7 @@ void	free_all_heap(t_head_list *sentinel)
 	if (!sentinel)
 		return ;
 	curr = sentinel->next;
-	while (curr == sentinel)
+	while (curr != sentinel)
 	{
 		tmp = curr;
 		curr = curr->next;
