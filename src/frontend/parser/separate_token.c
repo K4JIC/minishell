@@ -79,7 +79,8 @@ t_cmd_base	*convert_token_to_cmd_exec(t_token *head)
 	{
 		cmd_e->args[i] = ((t_token *)curr)->str;
 		curr = curr->next;
-		free((t_token *)curr->prev);
+		if (curr != NULL)
+			free((t_token *)curr->prev);
 		i++;
 	}
 	cmd_e->args[i] = NULL;
