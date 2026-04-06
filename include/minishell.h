@@ -5,6 +5,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdbool.h>
+# include <limits.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "libft.h"
@@ -79,6 +80,7 @@ typedef struct s_minishell{
 	int		syntax_error;// syntax_error flag
 	int		stdin_backup;// for redirection and built-in commands
 	int		stdout_backup;
+	int		should_exit;
 }t_minishell;
 
 t_list	*envp_to_lst(char **envp);
@@ -88,5 +90,6 @@ int		remove_env(t_list **env_list, char *key);
 void	free_env_content(t_env *env);
 int		print_export(t_list *env_list);
 int		is_valid_identifier(char *str);
+int		ft_exit(t_cmd *cmd, t_minishell *ms);
 
 #endif
