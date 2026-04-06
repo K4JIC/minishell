@@ -1,1 +1,223 @@
-[]
+[
+  {
+    "file": "src/main.c",
+    "arguments": [
+      "cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/main.c",
+      "-o",
+      "obj/main.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/42_03_minisharing",
+    "output": "obj/main.o"
+  },
+  {
+    "file": "src/frontend/frontend.c",
+    "arguments": [
+      "cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/frontend/frontend.c",
+      "-o",
+      "obj/frontend/frontend.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/42_03_minisharing",
+    "output": "obj/frontend/frontend.o"
+  },
+  {
+    "file": "src/frontend/lexer/label_token.c",
+    "arguments": [
+      "cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/frontend/lexer/label_token.c",
+      "-o",
+      "obj/frontend/lexer/label_token.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/42_03_minisharing",
+    "output": "obj/frontend/lexer/label_token.o"
+  },
+  {
+    "file": "src/frontend/lexer/tokenizer.c",
+    "arguments": [
+      "cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/frontend/lexer/tokenizer.c",
+      "-o",
+      "obj/frontend/lexer/tokenizer.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/42_03_minisharing",
+    "output": "obj/frontend/lexer/tokenizer.o"
+  },
+  {
+    "file": "src/frontend/parser/print_cmds.c",
+    "arguments": [
+      "cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/frontend/parser/print_cmds.c",
+      "-o",
+      "obj/frontend/parser/print_cmds.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/42_03_minisharing",
+    "output": "obj/frontend/parser/print_cmds.o"
+  },
+  {
+    "file": "src/frontend/parser/separate_token.c",
+    "arguments": [
+      "cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/frontend/parser/separate_token.c",
+      "-o",
+      "obj/frontend/parser/separate_token.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/42_03_minisharing",
+    "output": "obj/frontend/parser/separate_token.o"
+  },
+  {
+    "file": "src/frontend/utils/find_token.c",
+    "arguments": [
+      "cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/frontend/utils/find_token.c",
+      "-o",
+      "obj/frontend/utils/find_token.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/42_03_minisharing",
+    "output": "obj/frontend/utils/find_token.o"
+  },
+  {
+    "file": "src/frontend/utils/print_token.c",
+    "arguments": [
+      "cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/frontend/utils/print_token.c",
+      "-o",
+      "obj/frontend/utils/print_token.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/42_03_minisharing",
+    "output": "obj/frontend/utils/print_token.o"
+  },
+  {
+    "file": "src/frontend/utils/token_list.c",
+    "arguments": [
+      "cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/frontend/utils/token_list.c",
+      "-o",
+      "obj/frontend/utils/token_list.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/42_03_minisharing",
+    "output": "obj/frontend/utils/token_list.o"
+  },
+  {
+    "file": "src/envlst/envp_to_lst.c",
+    "arguments": [
+      "cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/envlst/envp_to_lst.c",
+      "-o",
+      "obj/envlst/envp_to_lst.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/42_03_minisharing",
+    "output": "obj/envlst/envp_to_lst.o"
+  },
+  {
+    "file": "src/utils/list/intrusive_list.c",
+    "arguments": [
+      "cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/utils/list/intrusive_list.c",
+      "-o",
+      "obj/utils/list/intrusive_list.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/42_03_minisharing",
+    "output": "obj/utils/list/intrusive_list.o"
+  },
+  {
+    "file": "src/utils/msmalloc/ms_malloc.c",
+    "arguments": [
+      "cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/utils/msmalloc/ms_malloc.c",
+      "-o",
+      "obj/utils/msmalloc/ms_malloc.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/42_03_minisharing",
+    "output": "obj/utils/msmalloc/ms_malloc.o"
+  },
+  {
+    "file": "src/utils/quote/ms_quote.c",
+    "arguments": [
+      "cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/utils/quote/ms_quote.c",
+      "-o",
+      "obj/utils/quote/ms_quote.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/42_03_minisharing",
+    "output": "obj/utils/quote/ms_quote.o"
+  }
+]

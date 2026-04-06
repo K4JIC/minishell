@@ -18,10 +18,13 @@ static t_token_lr	sep_token_list(t_token *head, t_operator_type del)
 	}
 	if (cur == NULL)
 		return (lr);
-	(((t_head_list *)cur)->prev)->next = NULL;
-	(((t_head_list *)cur)->next)->prev = NULL;
+	if (((t_head_list *)cur)->prev)
+		(((t_head_list *)cur)->prev)->next = NULL;
+	if (((t_head_list *)cur)->next)
+		(((t_head_list *)cur)->next)->prev = NULL;
 	lr.left = head;
 	lr.right = (t_token *)((t_head_list *)cur)->next;
+	free_token(cur);
 	return (lr);
 }
 
@@ -126,7 +129,7 @@ int	convert_token_to_cmd(t_minishell *sh, t_cmd_base **parent, t_token *head)
 			return (free(*parent), FAILURE);
 		ret = convert_token_to_cmd(sh, &((t_cmd_btree *)*parent)->right, lr.right);
 		if (ret == FAILURE)
-			return (free(*parent), FAILURE);
+			return (free(*parent), free(((t_cmd_btree *)*parent)->left), FAILURE);
 	}
 	if (lr.found_op == NO_OP)
 	{
