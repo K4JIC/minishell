@@ -28,6 +28,9 @@ int	frontend(char *input, t_minishell *ms)
 		return (FAILURE);
 	if (cmd_head->type == CMD_EXEC)
 	{
+		ms->cmd_list = ft_calloc(sizeof(t_cmd), 1);
+		if (!ms->cmd_list)
+			return (FAILURE);
 		ms->cmd_list->args = ((t_cmd_exec *)cmd_head)->args;
 	}
 	return (SUCCESS);
