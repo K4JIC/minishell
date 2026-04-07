@@ -17,6 +17,7 @@ int	main(void)
 		if (frontend(input, &ms) == FAILURE)
 			ft_printf("an error occured in frontend\n");
 		free(input);
+		free_cmds(ms.cmd_btree);
 	}
 	return (0);
 }

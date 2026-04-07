@@ -55,13 +55,14 @@ typedef struct s_cmd{
 
 //The master structure that controls everything
 typedef struct s_minishell{
-	t_list	*env_list;
-	t_token	*tokens;
-	t_cmd	*cmd_list;
-	int		exit_status;//for $?
-	int		syntax_error;// syntax_error flag
-	int		stdin_backup;// for redirection and built-in commands
-	int		stdout_backup;
+	t_list		*env_list;
+	t_token		*tokens;
+	t_cmd		*cmd_list;
+	t_cmd_base	*cmd_btree;
+	int			exit_status;//for $?
+	int			syntax_error;// syntax_error flag
+	int			stdin_backup;// for redirection and built-in commands
+	int			stdout_backup;
 }t_minishell;
 
 t_list	*envp_to_lst(char **envp);

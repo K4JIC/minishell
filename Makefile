@@ -13,6 +13,7 @@ SRCS	=	$(SRCS_DIR)/main.c\
 			$(SRCS_DIR)/frontend/lexer/tokenizer.c\
 			$(SRCS_DIR)/frontend/parser/separate_token.c\
 			$(SRCS_DIR)/frontend/utils/find_token.c\
+			$(SRCS_DIR)/frontend/utils/cmd_btree.c\
 			$(SRCS_DIR)/frontend/utils/token_list.c\
 			$(SRCS_DIR)/envlst/envp_to_lst.c\
 			$(SRCS_DIR)/utils/list/intrusive_list.c\

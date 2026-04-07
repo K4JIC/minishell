@@ -26,12 +26,6 @@ int	frontend(char *input, t_minishell *ms)
 	ret = convert_token_to_cmd(ms, &cmd_head, tk_head);
 	if (ret == FAILURE)
 		return (FAILURE);
-	if (cmd_head->type == CMD_EXEC)
-	{
-		ms->cmd_list = ft_calloc(sizeof(t_cmd), 1);
-		if (!ms->cmd_list)
-			return (FAILURE);
-		ms->cmd_list->args = ((t_cmd_exec *)cmd_head)->args;
-	}
+	ms->cmd_btree = cmd_head;
 	return (SUCCESS);
 }

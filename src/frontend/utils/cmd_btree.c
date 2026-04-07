@@ -18,8 +18,6 @@ static void	free_cmd_exec(t_cmd_exec *cmd)
 
 	if (cmd == NULL)
 		return ;
-	if (cmd->name != NULL)
-		free(cmd->name);
 	if (cmd->args != NULL)
 	{
 		i = 0;

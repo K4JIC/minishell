@@ -29,7 +29,7 @@ t_operator_type	distinguish_op_type(char *str)
 	else if (str[0] == ';')
 		return (OP_LIST);
 	else
-		return (OP_NOT_IMPLIMENTED);
+		return (OP_NOT_IMPLEMENTED);
 }
 
 void	*set_one_op_label(void *token)
