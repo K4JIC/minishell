@@ -34,7 +34,7 @@ static t_token_lr	sep_token_list(t_token *head, t_operator_type del)
 		(((t_head_list *)cur)->prev)->next = NULL;
 	if (((t_head_list *)cur)->next)
 		(((t_head_list *)cur)->next)->prev = NULL;
-	if (cur == head)
+	if (cur != head)
 		lr.left = head;
 	lr.right = (t_token *)((t_head_list *)cur)->next;
 	free_token(cur);
