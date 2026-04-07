@@ -43,24 +43,24 @@ static void	print_numeric_error(char *arg)
 	ft_putstr_fd(": numeric argument required\n", 2);
 }
 
-int	ft_exit(t_cmd *cmd, t_minishell *ms)
+int	ft_exit(char **args, t_minishell *ms)
 {
 	long long	num;
 
 	ft_putstr_fd("exit\n", 2);
-	if (cmd->args[1] == NULL)
+	if (args[1] == NULL)
 	{
 		ms->should_exit = 1;
 		return (ms->exit_status);
 	}
-	if (!is_numeric_arg(cmd->args[1], &num))
+	if (!is_numeric_arg(args[1], &num))
 	{
-		print_numeric_error(cmd->args[1]);
+		print_numeric_error(args[1]);
 		ms->exit_status = 2;
 		ms->should_exit = 1;
 		return (2);
 	}
-	if (cmd->args[2] != NULL)
+	if (args[2] != NULL)
 	{
 		ft_putstr_fd("exit: too many arguments\n", 2);
 		return (FAILURE);
