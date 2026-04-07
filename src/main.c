@@ -2,7 +2,8 @@
 
 int	main(void)
 {
-	char *input;
+	char 		*input;
+	t_minishell	ms;
 
 	while (1)
 	{
@@ -10,9 +11,13 @@ int	main(void)
 		if (input == NULL)
 			break;
 		if (*input)
-			add_history(input);//入力文字列を保存する、↑でコマンドを再利用できるようにする  
-		printf("入力値: %s\n", input);
+			add_history(input);//入力文字列を保存する、↑でコマンドを再利用できるようにする
+		ft_printf("入力値: %s\n", input);
+		ft_bzero(&ms, sizeof(t_minishell));
+		if (frontend(input, &ms) == FAILURE)
+			ft_printf("an error occured in frontend\n");
 		free(input);
+		free_cmds(ms.cmd_btree);
 	}
 	return (0);
 }
