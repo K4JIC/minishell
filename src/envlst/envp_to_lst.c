@@ -1,5 +1,10 @@
 #include "minishell.h"
 
+static void	del_env(void *content)
+{
+	free_env_content((t_env *)content);
+}
+
 static t_env	*create_env_content(char *key, char *value)
 {
 	t_env	*env;
@@ -78,7 +83,10 @@ t_list	*envp_to_lst(char **envp)
 		ret = set_val_and_key(envp[i], &env_list);
         // TODO: consider handling SKIP case if needed
 		if (ret == FAILURE)
+		{
+			ft_lstclear(&env_list, del_env);
 			return (NULL);
+		}
 		i++;
 	}
 	return (env_list);

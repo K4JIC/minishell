@@ -55,6 +55,20 @@ static void	sort_env_arr(t_env **arr, int count)
 	}
 }
 
+static void	print_one_env(t_env *env)
+{
+	ft_putstr_fd("declare -x ", STDOUT_FILENO);
+	ft_putstr_fd(env->key, STDOUT_FILENO);
+	if (env->value)
+	{
+		ft_putstr_fd("=\"", STDOUT_FILENO);
+		ft_putstr_fd(env->value, STDOUT_FILENO);
+		ft_putstr_fd("\"\n", STDOUT_FILENO);
+	}
+	else
+		write(STDOUT_FILENO, "\n", 1);
+}
+
 int	print_export(t_list *env_list)
 {
 	t_env **arr;
@@ -62,6 +76,8 @@ int	print_export(t_list *env_list)
 	int		i;
 
 	count = env_list_size(env_list);
+	if (count == 0)
+		return (SUCCESS);
 	arr = env_list_to_arr(env_list, count);
 	if (!arr)
 		return (FAILURE);
@@ -69,16 +85,7 @@ int	print_export(t_list *env_list)
 	i = 0;
 	while (i < count)
 	{
-		ft_putstr_fd("declare -x ", STDOUT_FILENO);
-		ft_putstr_fd(arr[i]->key, STDOUT_FILENO);
-		if (arr[i]->value)
-		{
-			ft_putstr_fd("=\"", STDOUT_FILENO);
-			ft_putstr_fd(arr[i]->value, STDOUT_FILENO);
-			ft_putstr_fd("\"\n", STDOUT_FILENO);
-		}
-		else
-			write(STDOUT_FILENO, "\n", 1);
+		print_one_env(arr[i]);
 		i++;
 	}
 	return (free(arr), SUCCESS);

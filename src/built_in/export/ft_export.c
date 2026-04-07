@@ -38,7 +38,8 @@ static int	export_one(char *arg, t_list **env_list)
 	key = ft_substr(arg, 0, equal - arg);
 	if (!key)
 		return (FAILURE);
-	set_env(env_list, key, equal + 1);
+	if (set_env(env_list, key, equal + 1) == FAILURE)
+		return (free(key), FAILURE);
 	free(key);
 	return (SUCCESS);
 }
