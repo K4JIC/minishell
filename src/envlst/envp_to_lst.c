@@ -1,10 +1,5 @@
 #include "minishell.h"
 
-static void	del_env(void *content)
-{
-	free_env_content((t_env *)content);
-}
-
 static t_env	*create_env_content(char *key, char *value)
 {
 	t_env	*env;
