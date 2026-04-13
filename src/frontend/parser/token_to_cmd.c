@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_to_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tozaki <tozaki@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: tozaki <tozaki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 23:10:11 by tozaki            #+#    #+#             */
-/*   Updated: 2026/04/06 23:10:13 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/04/14 04:14:23 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ t_cmd_base	*create_cmd_btree_node(t_operator_type type)
 	return ((t_cmd_base *)ret);
 }
 
-static int	dispatch_token_conversion(t_minishell *sh, t_cmd_base **parent,
-		t_token *head)
+int	dispatch_token_conversion(t_minishell *sh, t_cmd_base **parent,
+		t_token *head, t_token *tail)
 {
 	t_token_lr	lr;
 
-	lr = sep_token_list_op(head);
+	lr = sep_token_list_op(head, tail);
 	if (lr.found_op == OP_PIPE)
 		return (convert_pipe(sh, parent, lr));
 	else if (lr.found_op == OP_LIST)
@@ -56,15 +56,15 @@ static int	dispatch_token_conversion(t_minishell *sh, t_cmd_base **parent,
 	else if (lr.found_op != NO_OP)
 		return (convert_redir(sh, parent, lr));
 	else
-		return (convert_exec(sh, parent, head));
+		return (convert_exec(sh, parent, head, tail));
 }
 
 int	convert_token_to_cmd(t_minishell *sh, t_cmd_base **parent, t_token *head)
 {
 	int	ret;
 
-	ret = dispatch_token_conversion(sh, parent, head);
+	ret = dispatch_token_conversion(sh, parent, head, NULL);
 	if (ret == FAILURE)
-		return (free_all_token(head), FAILURE);
+		return (FAILURE);
 	return (SUCCESS);
 }

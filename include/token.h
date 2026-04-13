@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer.h                                        :+:      :+:    :+:   */
+/*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tozaki <tozaki@student.42.jp>              +#+  +:+       +#+        */
+/*   By: tozaki <tozaki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 16:31:05 by tozaki            #+#    #+#             */
-/*   Updated: 2026/03/05 17:01:31 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/04/13 22:22:15 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,18 @@ typedef struct s_token_operator
 	t_operator_type	op_type;
 }	t_token_operator;
 
+typedef struct s_token_span
+{
+	t_token	*head;
+	t_token	*tail;
+}	t_token_span;
+
 typedef struct s_token_lr
 {
-	t_token			*left;
-	t_token			*right;
+	t_token_span	left;
+	t_token_span	right;
 	t_operator_type	found_op;
 }	t_token_lr;
-
 // expand envval
 char	*substitute_envval(char *p, t_list *envlist);
 

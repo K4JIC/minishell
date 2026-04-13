@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   search_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tozaki <tozaki@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: tozaki <tozaki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 23:10:11 by tozaki            #+#    #+#             */
-/*   Updated: 2026/04/06 23:10:13 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/04/13 22:32:57 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token	*find_operator(t_token *head, t_operator_type del)
+t_token	*find_operator(t_token *head, t_token *tail, t_operator_type del)
 {
 	t_token	*cur;
 
 	cur = head;
-	while (cur != NULL)
+	while (cur != NULL && cur != tail)
 	{
 		if (cur->type == TK_OPERATOR)
 		{
@@ -29,46 +29,44 @@ t_token	*find_operator(t_token *head, t_operator_type del)
 	return (NULL);
 }
 
-static t_token_lr	separate_at_token(t_token *head, t_token *op)
+static t_token_lr	separate_at_token(t_token *head, t_token *tail, t_token *op)
 {
 	t_token_lr	lr;
 
 	ft_bzero(&lr, sizeof(lr));
-	if (((t_head_list *)op)->prev)
-		(((t_head_list *)op)->prev)->next = NULL;
-	if (((t_head_list *)op)->next)
-		(((t_head_list *)op)->next)->prev = NULL;
 	if (op != head)
-		lr.left = head;
-	lr.right = (t_token *)((t_head_list *)op)->next;
-	free_token(op);
+		lr.left.head = head;
+	lr.left.tail = op;
+	lr.right.head = (t_token *)((t_head_list *)op)->next;
+	lr.right.tail = tail;
 	return (lr);
 }
 
-static t_token_lr	sep_token_list(t_token *head, t_operator_type del)
+static t_token_lr	sep_token_list(t_token *head, t_token *tail,
+		t_operator_type del)
 {
 	t_token		*op;
 	t_token_lr	lr;
 
 	ft_bzero(&lr, sizeof(lr));
-	op = find_operator(head, del);
+	op = find_operator(head, tail, del);
 	if (op == NULL)
 		return (lr);
-	lr = separate_at_token(head, op);
+	lr = separate_at_token(head, tail, op);
 	lr.found_op = del;
 	return (lr);
 }
 
-t_token_lr	sep_token_list_op(t_token *head)
+t_token_lr	sep_token_list_op(t_token *head, t_token *tail)
 {
 	t_token_lr	lr;
 
 	ft_bzero(&lr, sizeof(lr));
-	lr = sep_token_list(head, OP_LIST);
-	if (lr.right != NULL)
+	lr = sep_token_list(head, tail, OP_LIST);
+	if (lr.right.head != NULL)
 		return (lr);
-	lr = sep_token_list(head, OP_PIPE);
-	if (lr.right != NULL)
+	lr = sep_token_list(head, tail, OP_PIPE);
+	if (lr.right.head != NULL)
 		return (lr);
 	lr.found_op = NO_OP;
 	return (lr);
