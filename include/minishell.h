@@ -6,6 +6,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdbool.h>
+# include <limits.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "libft.h"
@@ -48,7 +49,7 @@ typedef struct s_cmd{
 	char				**args;
 	t_list				*redirects;
 	int					pid;
-	struct s_cmd_lst	*next;
+	struct s_cmd		*next;
 	int					fd_in;
 	int					fd_out;
 }t_cmd;
@@ -63,9 +64,17 @@ typedef struct s_minishell{
 	int			syntax_error;// syntax_error flag
 	int			stdin_backup;// for redirection and built-in commands
 	int			stdout_backup;
+	int			should_exit;
 }t_minishell;
 
 t_list	*envp_to_lst(char **envp);
+t_env	*find_env(t_list *env_list, char *key);
+int		set_env(t_list **env_list, char *key, char *value);
+int		remove_env(t_list **env_list, char *key);
+void	free_env_content(t_env *env);
+int		print_export(t_list *env_list);
+int		is_valid_identifier(char *str);
+int		ft_exit(t_cmd *cmd, t_minishell *ms);
 
 int		frontend(char *input, t_minishell *ms);
 int		convert_token_to_cmd(t_minishell *sh, t_cmd_base **parent, t_token *head);
