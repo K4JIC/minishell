@@ -11,7 +11,12 @@ SRCS	=	$(SRCS_DIR)/main.c\
 			$(SRCS_DIR)/frontend/frontend.c\
 			$(SRCS_DIR)/frontend/lexer/label_token.c\
 			$(SRCS_DIR)/frontend/lexer/tokenizer.c\
-			$(SRCS_DIR)/frontend/parser/separate_token.c\
+			$(SRCS_DIR)/frontend/parser/encase_cmd_exec.c\
+			$(SRCS_DIR)/frontend/parser/encase_cmd_list.c\
+			$(SRCS_DIR)/frontend/parser/encase_cmd_pipe.c\
+			$(SRCS_DIR)/frontend/parser/encase_cmd_redir.c\
+			$(SRCS_DIR)/frontend/parser/search_token.c\
+			$(SRCS_DIR)/frontend/parser/token_to_cmd.c\
 			$(SRCS_DIR)/frontend/utils/find_token.c\
 			$(SRCS_DIR)/frontend/utils/cmd_btree.c\
 			$(SRCS_DIR)/frontend/utils/token_list.c\

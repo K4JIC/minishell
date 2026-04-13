@@ -12,13 +12,13 @@
 
 #include "minishell.h"
 
-int	convert_pipe(t_minishell *sh, t_cmd_base **parent, t_token_lr lr)
+int	convert_list(t_minishell *sh, t_cmd_base **parent, t_token_lr lr)
 {
 	int	ret;
 
 	if (lr.left == NULL || lr.right == NULL)
-		return (syntax_error("syntax error near unexpected token '|'", sh), FAILURE);
-	*parent = create_cmd_btree_node(OP_PIPE);
+		return (syntax_error("syntax error near unexpected token ';'", sh), FAILURE);
+	*parent = create_cmd_btree_node(OP_LIST);
 	if (!*parent)
 		return (FAILURE);
 	ret = convert_token_to_cmd(sh, &((t_cmd_btree *)*parent)->left, lr.left);
