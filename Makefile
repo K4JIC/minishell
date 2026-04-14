@@ -1,9 +1,11 @@
 NAME	= minishell
+DEBUG_NAME	= minishell_debug
 CC		= cc
 CFLAGS	= -Wall -Wextra -Werror
 
 SRCS_DIR	= src
 OBJS_DIR	= obj
+DEBUG_OBJS_DIR	= obj_debug
 INC_DIR		= include
 LIBFT_DIR	= src/libft
 
@@ -42,14 +44,21 @@ DEBUG_SRCS	=	$(SRCS_DIR)/test/frontend_test.c\
 				$(SRCS_DIR)/test/print_token.c
 
 OBJS	= $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
+DEBUG_BUILD_SRCS	= $(filter-out $(SRCS_DIR)/frontend/frontend.c, $(SRCS)) $(DEBUG_SRCS)
+DEBUG_OBJS	= $(DEBUG_BUILD_SRCS:$(SRCS_DIR)/%.c=$(DEBUG_OBJS_DIR)/%.o)
 LIBFT	= $(LIBFT_DIR)/libft.a
 
 LIBS	= -lreadline -L$(LIBFT_DIR) -lft
 
 all: $(NAME)
 
+debug: $(DEBUG_NAME)
+
 $(NAME): $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
+
+$(DEBUG_NAME): $(LIBFT) $(DEBUG_OBJS)
+	$(CC) $(CFLAGS) $(DEBUG_OBJS) $(LIBS) -o $(DEBUG_NAME)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
@@ -58,14 +67,24 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -I$(INC_DIR) -I$(LIBFT_DIR) -c $< -o $@
 
+$(DEBUG_OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -I$(INC_DIR) -I$(LIBFT_DIR) -c $< -o $@
+
+run: $(NAME)
+	./$(NAME)
+
+run-debug: $(DEBUG_NAME)
+	./$(DEBUG_NAME)
+
 clean:
 	make -C $(LIBFT_DIR) clean
-	rm -rf $(OBJS_DIR)
+	rm -rf $(OBJS_DIR) $(DEBUG_OBJS_DIR)
 
 fclean: clean
 	make -C $(LIBFT_DIR) fclean
-	rm -f $(NAME)
+	rm -f $(NAME) $(DEBUG_NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all debug run run-debug clean fclean re

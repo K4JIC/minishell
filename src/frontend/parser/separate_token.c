@@ -6,7 +6,7 @@
 /*   By: tozaki <tozaki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 23:10:11 by tozaki            #+#    #+#             */
-/*   Updated: 2026/04/14 19:34:58 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/04/14 20:34:22 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static t_token_lr	sep_token_list(t_token *head, t_token *tail,
 	t_token_lr	lr;
 
 	ft_bzero(&lr, sizeof(lr));
+	lr.found_op = NO_OP;
 	op = find_operator(head, tail, del);
 	if (op == NULL)
 		return (lr);
@@ -62,24 +63,24 @@ t_token_lr	sep_token_list_op(t_token *head, t_token *tail)
 	t_token_lr	lr;
 
 	ft_bzero(&lr, sizeof(lr));
+	lr.found_op = NO_OP;
 	lr = sep_token_list(head, tail, OP_LIST);
-	if (lr.right.head != NULL)
+	if (lr.found_op != NO_OP)
 		return (lr);
 	lr = sep_token_list(head, tail, OP_PIPE);
-	if (lr.right.head != NULL)
+	if (lr.found_op != NO_OP)
 		return (lr);
 	lr = sep_token_list(head, tail, OP_REDIR_IN);
-	if (lr.right.head != NULL)
+	if (lr.found_op != NO_OP)
 		return (lr);
 	lr = sep_token_list(head, tail, OP_REDIR_OUT);
-	if (lr.right.head != NULL)
+	if (lr.found_op != NO_OP)
 		return (lr);
 	lr = sep_token_list(head, tail, OP_REDIR_APP);
-	if (lr.right.head != NULL)
+	if (lr.found_op != NO_OP)
 		return (lr);
 	lr = sep_token_list(head, tail, OP_REDIR_HDOC);
-	if (lr.right.head != NULL)
+	if (lr.found_op != NO_OP)
 		return (lr);
-	lr.found_op = NO_OP;
 	return (lr);
 }

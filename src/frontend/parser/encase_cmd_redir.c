@@ -6,7 +6,7 @@
 /*   By: tozaki <tozaki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 23:10:11 by tozaki            #+#    #+#             */
-/*   Updated: 2026/04/14 20:02:03 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/04/14 20:39:01 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 static int	validate_redir(t_token_lr lr)
 {
-	if (lr.left.head == NULL || lr.right.head == NULL)
+	if (lr.right.head == NULL)
 		return (FAILURE);
 	if (lr.right.head == lr.right.tail)
+		return (FAILURE);
+	if (lr.right.head->type != TK_WORD) 
 		return (FAILURE);
 	return (SUCCESS);
 }
@@ -101,13 +103,14 @@ int	convert_redir(t_minishell *sh, t_cmd_base **parent, t_token_lr lr)
 	int				ret;
 
 	if (validate_redir(lr) == FAILURE)
-		return (FAILURE);
+		return (syntax_error("syntax error near unexpected token\n", sh), FAILURE);
 	*parent = ft_calloc(sizeof(t_cmd_redir), 1);
 	if (!*parent)
 		return (FAILURE);
 	(*parent)->type = CMD_REDIR;
 	cmd_r = (t_cmd_redir *)*parent;
 	cmd_r->mode = lr.found_op;
+	cmd_r->fd = -1;
 	cmd_r->filename = ft_strdup(lr.right.head->str);
 	if (!cmd_r->filename)
 		return (free_cmds(*parent), FAILURE);
