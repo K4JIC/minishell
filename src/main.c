@@ -12,7 +12,6 @@ int	main(void)
 			break;
 		if (*input)
 			add_history(input);//入力文字列を保存する、↑でコマンドを再利用できるようにする
-		ft_printf("入力値: %s\n", input);
 		ft_bzero(&ms, sizeof(t_minishell));
 		if (frontend(input, &ms) == FAILURE)
 			ft_printf("an error occured in frontend\n");

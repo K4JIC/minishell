@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   search_token.c                                     :+:      :+:    :+:   */
+/*   separate_token.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tozaki <tozaki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 23:10:11 by tozaki            #+#    #+#             */
-/*   Updated: 2026/04/13 22:32:57 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/04/14 19:34:58 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,18 @@ t_token_lr	sep_token_list_op(t_token *head, t_token *tail)
 	if (lr.right.head != NULL)
 		return (lr);
 	lr = sep_token_list(head, tail, OP_PIPE);
+	if (lr.right.head != NULL)
+		return (lr);
+	lr = sep_token_list(head, tail, OP_REDIR_IN);
+	if (lr.right.head != NULL)
+		return (lr);
+	lr = sep_token_list(head, tail, OP_REDIR_OUT);
+	if (lr.right.head != NULL)
+		return (lr);
+	lr = sep_token_list(head, tail, OP_REDIR_APP);
+	if (lr.right.head != NULL)
+		return (lr);
+	lr = sep_token_list(head, tail, OP_REDIR_HDOC);
 	if (lr.right.head != NULL)
 		return (lr);
 	lr.found_op = NO_OP;

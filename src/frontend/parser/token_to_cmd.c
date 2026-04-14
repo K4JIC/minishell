@@ -6,7 +6,7 @@
 /*   By: tozaki <tozaki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 23:10:11 by tozaki            #+#    #+#             */
-/*   Updated: 2026/04/14 04:14:23 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/04/14 18:44:03 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ int	dispatch_token_conversion(t_minishell *sh, t_cmd_base **parent,
 		return (convert_pipe(sh, parent, lr));
 	else if (lr.found_op == OP_LIST)
 		return (convert_list(sh, parent, lr));
-	else if (lr.found_op != NO_OP)
+	else if (lr.found_op == OP_REDIR_IN || lr.found_op == OP_REDIR_OUT
+			|| lr.found_op == OP_REDIR_APP || lr.found_op == OP_REDIR_HDOC)
 		return (convert_redir(sh, parent, lr));
 	else
 		return (convert_exec(sh, parent, head, tail));

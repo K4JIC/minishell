@@ -6,7 +6,7 @@
 /*   By: tozaki <tozaki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 23:10:11 by tozaki            #+#    #+#             */
-/*   Updated: 2026/04/13 22:32:57 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/04/14 19:55:04 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,29 @@ void	free_args(char **args, int i)
 	free(args);
 }
 
+static int	token_len(t_token *head, t_token *tail)
+{
+	t_head_list	*curr;
+	int			tklen;
+
+	tklen = 0;
+	curr = (t_head_list *)head;
+	while (curr && curr != (t_head_list *)tail)
+	{
+		tklen++;
+		curr = curr->next;
+	}
+	return (tklen);
+}
+
+
 int	copy_args(char ***args, t_token *head, t_token *tail)
 {
 	t_head_list	*curr;
 	int			listlen;
 	int			i;
 
-	curr = ((t_head_list *)head);
-	listlen = 0;
-	while (curr != NULL && (t_token *)curr != tail)
-	{
-		listlen++;
-		curr = curr->next;
-	}
+	listlen = token_len(head, tail);
 	*args = ft_calloc(sizeof(char *), listlen + 1);
 	if (!*args)
 		return (FAILURE);
