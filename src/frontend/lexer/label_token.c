@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   laveling.c                                         :+:      :+:    :+:   */
+/*   label_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tozaki <tozaki@student.42.jp>              +#+  +:+       +#+        */
+/*   By: tozaki <tozaki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 18:04:56 by tozaki            #+#    #+#             */
-/*   Updated: 2026/03/05 17:01:54 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/04/14 20:25:49 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ t_operator_type	distinguish_op_type(char *str)
 		return (OP_REDIR_APP);
 	else if (ft_strncmp("<<", str, 2) == 0)
 		return (OP_REDIR_HDOC);
-	else if (str[0] == '<')
+	else if (str[0] == '<' && str[1] == 0)
 		return (OP_REDIR_IN);
-	else if (str[0] == '>')
+	else if (str[0] == '>' && str[1] == 0)
 		return (OP_REDIR_OUT);
-	else if (str[0] == '|')
+	else if (str[0] == '|' && str[1] == 0)
 		return (OP_PIPE);
-	else if (str[0] == ';')
+	else if (str[0] == ';' && str[1] == 0)
 		return (OP_LIST);
 	else
 		return (OP_NOT_IMPLEMENTED);

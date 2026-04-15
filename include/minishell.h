@@ -78,6 +78,18 @@ void	free_str_array(char **arr);
 
 int		frontend(char *input, t_minishell *ms);
 int		convert_token_to_cmd(t_minishell *sh, t_cmd_base **parent, t_token *head);
+int		dispatch_token_conversion(t_minishell *sh, t_cmd_base **parent,
+			t_token *head, t_token *tail);
 void	print_all_cmd(t_cmd_base *cmd);
+
+int	convert_exec(t_minishell *sh, t_cmd_base **parent,
+		t_token *head, t_token *tail);
+int	convert_list(t_minishell *sh, t_cmd_base **parent, t_token_lr lr);
+int	convert_pipe(t_minishell *sh, t_cmd_base **parent, t_token_lr lr);
+int	convert_redir(t_minishell *sh, t_cmd_base **parent, t_token_lr lr);
+
+t_token_lr	sep_token_list_op(t_token *head, t_token *tail);
+t_cmd_base	*create_cmd_btree_node(t_operator_type type);
+void		syntax_error(char *msg, t_minishell *sh);
 
 #endif

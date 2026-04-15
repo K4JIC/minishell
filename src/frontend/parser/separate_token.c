@@ -3,154 +3,84 @@
 /*                                                        :::      ::::::::   */
 /*   separate_token.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tozaki <tozaki@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: tozaki <tozaki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 23:10:11 by tozaki            #+#    #+#             */
-/*   Updated: 2026/04/06 23:10:13 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/04/14 20:34:22 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_token_lr	sep_token_list(t_token *head, t_operator_type del)
+t_token	*find_operator(t_token *head, t_token *tail, t_operator_type del)
 {
-	t_token		*cur;
-	t_token_lr	lr;
+	t_token	*cur;
 
-	ft_bzero(&lr, sizeof(lr));
 	cur = head;
-	while (cur != NULL)
+	while (cur != NULL && cur != tail)
 	{
 		if (cur->type == TK_OPERATOR)
 		{
 			if (((t_token_operator *)cur)->op_type == del)
-				break ;
+				return (cur);
 		}
 		cur = (t_token *)((t_head_list *)cur)->next;
 	}
-	if (cur == NULL)
-		return (lr);
-	if (((t_head_list *)cur)->prev)
-		(((t_head_list *)cur)->prev)->next = NULL;
-	if (((t_head_list *)cur)->next)
-		(((t_head_list *)cur)->next)->prev = NULL;
-	if (cur != head)
-		lr.left = head;
-	lr.right = (t_token *)((t_head_list *)cur)->next;
-	free_token(cur);
-	return (lr);
+	return (NULL);
 }
 
-t_token_lr	sep_token_list_op(t_token *head)
+static t_token_lr	separate_at_token(t_token *head, t_token *tail, t_token *op)
 {
 	t_token_lr	lr;
 
 	ft_bzero(&lr, sizeof(lr));
-	lr = sep_token_list(head, OP_LIST);
-	if (lr.right != NULL)
-	{
-		lr.found_op = OP_LIST;
-		return (lr);
-	}
-	lr = sep_token_list(head, OP_PIPE);
-	if (lr.right != NULL)
-	{
-		lr.found_op = OP_PIPE;
-		return (lr);
-	}
-	lr.found_op = NO_OP;
+	if (op != head)
+		lr.left.head = head;
+	lr.left.tail = op;
+	lr.right.head = (t_token *)((t_head_list *)op)->next;
+	lr.right.tail = tail;
 	return (lr);
 }
 
-void	syntax_error(char *msg, t_minishell *sh)
+static t_token_lr	sep_token_list(t_token *head, t_token *tail,
+		t_operator_type del)
 {
-	ft_putstr_fd(msg, 2);
-	ft_putstr_fd("\n", 2);
-	if (sh)
-		sh->syntax_error = 1;
+	t_token		*op;
+	t_token_lr	lr;
+
+	ft_bzero(&lr, sizeof(lr));
+	lr.found_op = NO_OP;
+	op = find_operator(head, tail, del);
+	if (op == NULL)
+		return (lr);
+	lr = separate_at_token(head, tail, op);
+	lr.found_op = del;
+	return (lr);
 }
 
-t_cmd_base	*convert_token_to_cmd_exec(t_token *head)
-{
-	t_cmd_exec	*cmd_e;
-	t_head_list	*curr;
-	int			listlen;
-	int			i;
-
-	cmd_e = ft_calloc(sizeof(t_cmd_exec), 1);
-	if (!cmd_e)
-		return (NULL);
-	cmd_e->type = CMD_EXEC;
-	cmd_e->name = head->str;
-	curr = ((t_head_list *)head);
-	listlen = list_len(curr);
-	i = 0;
-	cmd_e->args = ft_calloc(sizeof(char *), listlen + 1);
-	if (!cmd_e->args)
-		return (free(cmd_e), NULL);
-	while (curr != NULL)
-	{
-		cmd_e->args[i] = ((t_token *)curr)->str;
-		curr = curr->next;
-		if (curr != NULL)
-			free((t_token *)curr->prev);
-		i++;
-	}
-	cmd_e->args[i] = NULL;
-	return ((t_cmd_base *)cmd_e);
-}
-
-t_cmd_base	*create_cmd_btree_node(t_operator_type type)
-{
-	t_cmd_base	*ret;
-
-	if (type == OP_PIPE)
-	{
-		ret = ft_calloc(sizeof(t_cmd_pipe), 1);
-		if (!ret)
-			return (NULL);
-		ret->type = CMD_PIPE;
-	}
-	else if (type == OP_LIST)
-	{
-		ret = ft_calloc(sizeof(t_cmd_list), 1);
-		if (!ret)
-			return (NULL);
-		ret->type = CMD_LIST;
-	}
-	else
-		return (NULL);
-	return ((t_cmd_base *)ret);
-}
-
-int	convert_token_to_cmd(t_minishell *sh, t_cmd_base **parent, t_token *head)
+t_token_lr	sep_token_list_op(t_token *head, t_token *tail)
 {
 	t_token_lr	lr;
-	int			ret;
 
-	lr = sep_token_list_op(head);
-	if (lr.found_op == OP_PIPE && lr.left == NULL)
-		return (syntax_error("syntax error near unexpected token '|'", sh), FAILURE);
-	if (lr.found_op == OP_PIPE && lr.right == NULL)
-		return (syntax_error("syntax error near unexpected token '|'", sh), FAILURE);
-	// if (lr.found_op == OP_REDIR_IN)
-	if (lr.found_op == OP_PIPE || lr.found_op == OP_LIST)
-	{
-		*parent = create_cmd_btree_node(lr.found_op);
-		if (!*parent)
-			return (FAILURE);
-		ret = convert_token_to_cmd(sh, &((t_cmd_btree *)*parent)->left, lr.left);
-		if (ret == FAILURE)
-			return (free(*parent), FAILURE);
-		ret = convert_token_to_cmd(sh, &((t_cmd_btree *)*parent)->right, lr.right);
-		if (ret == FAILURE)
-			return (free(((t_cmd_btree *)*parent)->left), free(*parent), FAILURE);
-	}
-	if (lr.found_op == NO_OP)
-	{
-		*parent = convert_token_to_cmd_exec(head);
-		if (!*parent)
-			return (FAILURE);
-	}
-	return (SUCCESS);
+	ft_bzero(&lr, sizeof(lr));
+	lr.found_op = NO_OP;
+	lr = sep_token_list(head, tail, OP_LIST);
+	if (lr.found_op != NO_OP)
+		return (lr);
+	lr = sep_token_list(head, tail, OP_PIPE);
+	if (lr.found_op != NO_OP)
+		return (lr);
+	lr = sep_token_list(head, tail, OP_REDIR_IN);
+	if (lr.found_op != NO_OP)
+		return (lr);
+	lr = sep_token_list(head, tail, OP_REDIR_OUT);
+	if (lr.found_op != NO_OP)
+		return (lr);
+	lr = sep_token_list(head, tail, OP_REDIR_APP);
+	if (lr.found_op != NO_OP)
+		return (lr);
+	lr = sep_token_list(head, tail, OP_REDIR_HDOC);
+	if (lr.found_op != NO_OP)
+		return (lr);
+	return (lr);
 }

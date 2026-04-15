@@ -14,6 +14,7 @@
 # define CMD_H
 
 # include "libft.h"
+# include "token.h"
 
 typedef enum
 {
@@ -42,11 +43,11 @@ typedef struct s_cmd_exec
 
 typedef struct s_cmd_redir
 {
-	t_cmd_type	type;
-	t_cmd_base	*cmd_head;
-	char		*filename;
-	int			mode;
-	int			fd;
+	t_cmd_type				type;
+	t_cmd_base				*cmd_head;
+	char					*filename;
+	t_operator_type			mode;
+	int						fd;
 }	t_cmd_redir;
 
 typedef struct s_cmd_btree
