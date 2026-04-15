@@ -62,3 +62,21 @@ int	apply_func(t_head_list *head, void *(*f)(void *))
 	}
 	return (SUCCESS);
 }
+
+int	apply_func_ctx(t_head_list *head, void *ctx, void *(*f)(void *, void *))
+{
+	t_head_list	*curr;
+	t_head_list	*tmp;
+
+	if (!head)
+		return (FAILURE);
+	curr = head;
+	while (curr)
+	{
+		tmp = curr;
+		curr = curr->next;
+		if (!f(tmp, ctx))
+			return (FAILURE);
+	}
+	return (SUCCESS);
+}
