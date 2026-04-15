@@ -35,6 +35,11 @@ SRCS	=	$(SRCS_DIR)/main.c\
 			$(SRCS_DIR)/envlst/utils/free_env_content.c\
 			$(SRCS_DIR)/envlst/utils/remove_env.c\
 			$(SRCS_DIR)/envlst/utils/set_env.c\
+			$(SRCS_DIR)/executor/builtin_dispatch.c\
+			$(SRCS_DIR)/executor/executor.c\
+			$(SRCS_DIR)/executor/exec_external.c\
+			$(SRCS_DIR)/executor/path_resolve.c\
+			$(SRCS_DIR)/executor/env_array.c\
 			$(SRCS_DIR)/utils/list/intrusive_list.c\
 			$(SRCS_DIR)/utils/msmalloc/ms_malloc.c\
 			$(SRCS_DIR)/utils/quote/ms_quote.c

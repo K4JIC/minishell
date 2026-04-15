@@ -44,18 +44,18 @@ static int	export_one(char *arg, t_list **env_list)
 	return (SUCCESS);
 }
 
-int	ft_export(t_cmd *cmd, t_list **env_list)
+int	ft_export(char **args, t_list **env_list)
 {
 	int	i;
 	int	ret;
 
-	if (!cmd->args[1])
+	if (!args[1])
 		return (print_export(*env_list));
 	ret = SUCCESS;
 	i = 1;
-	while(cmd->args[i])
+	while (args[i])
 	{
-		if (export_one(cmd->args[i], env_list) == FAILURE)
+		if (export_one(args[i], env_list) == FAILURE)
 			ret = FAILURE;
 		i++;
 	}

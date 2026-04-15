@@ -1,17 +1,17 @@
 #include "minishell.h"
 
-static char	*get_cd_path(t_cmd *cmd, t_list *env_list)
+static char	*get_cd_path(char **args, t_list *env_list)
 {
 	t_env	*env;
 
-	if (cmd->args[1] == NULL)
+	if (args[1] == NULL)
 	{
 		env = find_env(env_list, "HOME");
 		if (!env || !env->value)
 			return (ft_putstr_fd("cd: HOME not set\n", 2), NULL);
 		return (env->value);
 	}
-	if (cmd->args[1][0] == '-' && cmd->args[1][1] == '\0')
+	if (args[1][0] == '-' && args[1][1] == '\0')
 	{
 		env = find_env(env_list, "OLDPWD");
 		if (!env || !env->value)
@@ -20,7 +20,7 @@ static char	*get_cd_path(t_cmd *cmd, t_list *env_list)
 		write(1, "\n", 1);
 		return (env->value);
 	}
-	return (cmd->args[1]);
+	return (args[1]);
 }
 
 static int	update_pwd(t_list **env_list)
@@ -43,11 +43,11 @@ static int	update_pwd(t_list **env_list)
 	return (SUCCESS);
 }
 
-int	ft_cd(t_cmd *cmd, t_list **env_list)
+int	ft_cd(char **args, t_list **env_list)
 {
 	char	*path;
 
-	path = get_cd_path(cmd, *env_list);
+	path = get_cd_path(args, *env_list);
 	if (!path)
 		return (FAILURE);
 	if (chdir(path) == -1)

@@ -1,22 +1,28 @@
 #include "minishell.h"
 
-int	main(void)
+int	main(int ac, char **av, char **envp)
 {
-	char 		*input;
+	char		*input;
 	t_minishell	ms;
 
-	while (1)
+	(void)ac;
+	(void)av;
+	ft_bzero(&ms, sizeof(t_minishell));
+	ms.env_list = envp_to_lst(envp);
+	while (!ms.should_exit)
 	{
-		input = readline("minishell$ ");//編集可能な入力を行う、文字列は　mallocされている
+		input = readline("minishell$ ");
 		if (input == NULL)
-			break;
+			break ;
 		if (*input)
-			add_history(input);//入力文字列を保存する、↑でコマンドを再利用できるようにする
-		ft_bzero(&ms, sizeof(t_minishell));
-		if (frontend(input, &ms) == FAILURE)
-			ft_printf("an error occured in frontend\n");
+			add_history(input);
+		ms.cmd_btree = NULL;
+		if (frontend(input, &ms) == SUCCESS && ms.cmd_btree)
+			executor(ms.cmd_btree, &ms);
 		free(input);
 		free_cmds(ms.cmd_btree);
 	}
-	return (0);
+	ft_lstclear(&ms.env_list, del_env);
+	rl_clear_history();
+	return (ms.exit_status);
 }
