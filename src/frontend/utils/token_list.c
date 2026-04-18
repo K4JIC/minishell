@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "token.h"
-#include "libft.h"
+#include "minishell.h"
 #include <stdlib.h>
 
 // specialized func
@@ -44,7 +43,7 @@ void	add_token_last(t_token *head, t_token *new_token)
 	add_next_node(last_list, &new_token->list);
 }
 
-void	*free_token(void *token)
+int	free_token(void *token)
 {
 	t_token	*casted_token;
 
@@ -52,7 +51,7 @@ void	*free_token(void *token)
 	if (casted_token->str)
 		free(casted_token->str);
 	free(casted_token);
-	return ((void *)1);
+	return (SUCCESS);
 }
 
 void	free_all_token(t_token *head)

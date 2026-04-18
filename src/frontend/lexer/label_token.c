@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   label_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tozaki <tozaki@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tozaki <tozaki@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 18:04:56 by tozaki            #+#    #+#             */
-/*   Updated: 2026/04/14 20:25:49 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/04/18 15:19:23 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "token.h"
+#include "minishell.h"
 
 t_operator_type	distinguish_op_type(char *str)
 {
@@ -32,15 +32,15 @@ t_operator_type	distinguish_op_type(char *str)
 		return (OP_NOT_IMPLEMENTED);
 }
 
-void	*set_one_op_label(void *token)
+static int	set_one_op_label(void *token)
 {
 	t_token	*casted_token;
 
 	casted_token = (t_token *)token;
 	if (casted_token->type == TK_WORD)
-		return ((void *)1);
+		return (SUCCESS);
 	((t_token_operator *)casted_token)->op_type = distinguish_op_type(casted_token->str);
-	return ((void *)1);
+	return (SUCCESS);
 }
 
 void	set_all_op_label(t_token *head)

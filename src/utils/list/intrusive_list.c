@@ -45,7 +45,7 @@ int	list_len(t_head_list *head)
 }
 
 
-int	apply_func(t_head_list *head, void *(*f)(void *))
+int	apply_func(t_head_list *head, int (*f)(void *))
 {
 	t_head_list	*curr;
 	t_head_list	*tmp;
@@ -63,7 +63,7 @@ int	apply_func(t_head_list *head, void *(*f)(void *))
 	return (SUCCESS);
 }
 
-int	apply_func_ctx(t_head_list *head, void *ctx, void *(*f)(void *, void *))
+int	apply_func_ctx(t_head_list *head, void *ctx, int (*f)(void *, void *))
 {
 	t_head_list	*curr;
 	t_head_list	*tmp;

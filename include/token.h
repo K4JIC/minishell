@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tozaki <tozaki@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tozaki <tozaki@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 16:31:05 by tozaki            #+#    #+#             */
-/*   Updated: 2026/04/13 22:22:15 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/04/18 15:44:43 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,11 @@ char	*substitute_envval(char *p, t_list *envlist);
 // token list
 t_token		*create_token(char *str, t_token_type type);
 void		add_token_last(t_token *head, t_token *new_token);
-void		*free_token(void *token);
+int			free_token(void *token);
 void		free_all_token(t_token *head);
 
 // print token
-void		*print_token(void *token);
+int			print_token(void *token);
 void		print_all_token(t_token *head);
 
 // find token

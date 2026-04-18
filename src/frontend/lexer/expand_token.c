@@ -1,41 +1,64 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand_token.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tozaki <tozaki@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/16 20:37:24 by tozaki            #+#    #+#             */
+/*   Updated: 2026/04/18 16:16:47 by tozaki           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-char	*get_env_key(char *rawtext)
-{
-	char	*keytop;
-
-	keytop = ft_strchr(rawtext, '$');
-	if (!keytop)
-		return (NULL);
-	
-}
-
-char	*substitute_envval(char *rawtext, t_list *envlist)
+int	expanded_token_len(char *str, t_list *envlist)
 {
 	char	*expanded;
-	char	*key;
-	char	*value;
+	int		i;
+	int		len;
+	int		expanded_len;
 
-	key = get_env_key(rawtext);
-	while (key)
+	i = 0;
+	expanded_len = 0;
+	while (str[i])
 	{
+		if (str[i] == '\'')
+		{
+			len = get_quoted_string_len(&(str[i]));
+			expanded_len += len;
+		}
+		else if (str[i] == '$')
+		{
+			len = get_envkey_len(&(str[i]));
+			expanded_len += get_envval_len(&(str[i]), len, envlist);
+		}
+		else
+		{
+			len = 1;
+			expanded_len++;
+		}
+		i += len;
 	}
+	return (expanded_len);
 }
 
-void	*expand_envval_one(void *tk_one, void *ctx)
+int	expand_envval_one(void *tk_one, void *envlist)
 {
 	t_token	*tk;
 	char	*expanded;
 
 	tk = (t_token *)tk_one;
-	if (!tk || tk->type != TK_WORD || !tk->str)
-		return ((void *)1);
-	expanded = substitute_envval(tk->str, (t_list *)ctx);
+	if (!tk || !tk->str)
+		return (FAILURE);
+	if (tk->type != TK_WORD)
+		return (SUCCESS);
+	expanded = substitute_envval(tk->str, (t_list *)envlist);
 	if (!expanded)
-		return (NULL);
+		return (FAILURE);
 	free(tk->str);
 	tk->str = expanded;
-	return ((void *)1);
+	return (SUCCESS);
 }
 
 int	expand_envval(t_token *tk_head, t_list *envlist)
