@@ -6,20 +6,20 @@
 /*   By: tozaki <tozaki@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 19:15:51 by tozaki            #+#    #+#             */
-/*   Updated: 2026/04/22 23:06:25 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/04/22 23:39:48 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-typedef struct s_str_len
+typedef struct s_dynamic_str
 {
 	char	*str;
 	int		len;
 	int		capa;
-}	t_str_len;
+}	t_dynamic_str;
 
-static int	ensure_buf_capacity(t_str_len *buf, int add_len)
+static int	ensure_buf_capacity(t_dynamic_str *buf, int add_len)
 {
 	int		newcapa;
 	int		need;
@@ -46,13 +46,13 @@ static int	ensure_buf_capacity(t_str_len *buf, int add_len)
 	return (SUCCESS);
 }
 
-t_str_len	*init_buf(void)
+t_dynamic_str	*init_buf(void)
 {
-	t_str_len	*buf;
+	t_dynamic_str	*buf;
 
 	if (BUFFER_SIZE <= 0)
 		return (NULL);
-	buf = ft_calloc(1, sizeof(t_str_len));
+	buf = ft_calloc(1, sizeof(t_dynamic_str));
 	if (!buf)
 		return (NULL);
 	buf->str = ft_calloc(BUFFER_SIZE, sizeof(char));
@@ -62,7 +62,7 @@ t_str_len	*init_buf(void)
 	return (buf);
 }
 
-void	free_str_len(t_str_len *buf)
+void	free_str_len(t_dynamic_str *buf)
 {
 	if (!buf)
 		return ;
@@ -71,7 +71,7 @@ void	free_str_len(t_str_len *buf)
 	free(buf);
 }
 
-int	putnstr_buf(t_str_len *buf, const char *str, int n)
+int	putnstr_buf(t_dynamic_str *buf, const char *str, int n)
 {
 	if (!buf || !buf->str || !str)
 		return (FAILURE);
@@ -83,7 +83,7 @@ int	putnstr_buf(t_str_len *buf, const char *str, int n)
 	return (SUCCESS);
 }
 
-int	putstr_buf(t_str_len *buf, const char *str)
+int	putstr_buf(t_dynamic_str *buf, const char *str)
 {
 	int	len;
 
@@ -91,7 +91,7 @@ int	putstr_buf(t_str_len *buf, const char *str)
 	return (putnstr_buf(buf, str, len));
 }
 
-int	expand_as_dollar_mark(t_str_len *buf)
+int	expand_as_dollar_mark(t_dynamic_str *buf)
 {
 	int	len;
 
@@ -101,7 +101,7 @@ int	expand_as_dollar_mark(t_str_len *buf)
 	return (len);
 }
 
-int	expand_as_envval(char *dollar, t_str_len *buf, t_list *env_list)
+int	expand_as_envval(char *dollar, t_dynamic_str *buf, t_list *env_list)
 {
 	int		keylen;
 	char	*key;
@@ -122,7 +122,7 @@ int	expand_as_envval(char *dollar, t_str_len *buf, t_list *env_list)
 	return (keylen);
 }
 
-int	expand_as_exit_status(t_str_len *buf, int exit_status)
+int	expand_as_exit_status(t_dynamic_str *buf, int exit_status)
 {
 	int		len;
 	char	*str_exit_status;
@@ -138,7 +138,7 @@ int	expand_as_exit_status(t_str_len *buf, int exit_status)
 }
 
 // returns length of strings starts with $
-int	expand_dollar_mark(char *dollar, t_str_len *buf, t_list *env_list, int exit_status)
+int	expand_dollar_mark(char *dollar, t_dynamic_str *buf, t_list *env_list, int exit_status)
 {
 	int	len;
 
@@ -153,7 +153,7 @@ int	expand_dollar_mark(char *dollar, t_str_len *buf, t_list *env_list, int exit_
 	return (len);
 }
 
-int	expand_single_quote(char *p, t_str_len *buf)
+int	expand_single_quote(char *p, t_dynamic_str *buf)
 {
 	int	len;
 
@@ -170,7 +170,7 @@ int	expand_single_quote(char *p, t_str_len *buf)
 	return (len + 1);
 }
 
-int	expand_double_quote(char *p, t_str_len *buf, t_list *env_list, int exit_status)
+int	expand_double_quote(char *p, t_dynamic_str *buf, t_list *env_list, int exit_status)
 {
 	int			total_len;
 	int			len;
@@ -192,7 +192,7 @@ int	expand_double_quote(char *p, t_str_len *buf, t_list *env_list, int exit_stat
 	return (total_len + 1);
 }
 
-int	expand_quote(char *p, t_str_len *buf, t_list *env_list, int exit_status)
+int	expand_quote(char *p, t_dynamic_str *buf, t_list *env_list, int exit_status)
 {
 	if (!p || (*p != '\'' && *p != '\"'))
 		return (-1);
@@ -203,14 +203,14 @@ int	expand_quote(char *p, t_str_len *buf, t_list *env_list, int exit_status)
 	return (-1);
 }
 
-int	no_expand(char p, t_str_len *buf)
+int	no_expand(char p, t_dynamic_str *buf)
 {
 	if (putnstr_buf(buf, &p, 1) == FAILURE)
 		return (-1);
 	return (1);
 }
 
-int	dispatch_expand_one_str(char *p, t_str_len *buf, t_list *env_list, int exit_status)
+int	dispatch_expand_one_str(char *p, t_dynamic_str *buf, t_list *env_list, int exit_status)
 {
 	int			i;
 	int			len;
@@ -235,7 +235,7 @@ void	*expand_one_token(void *raw_token, void *raw_minishell)
 {
 	t_token		*token;
 	t_minishell	*ms;
-	t_str_len	*buf;
+	t_dynamic_str	*buf;
 	int			ret;
 
 	token = (t_token *)raw_token;
