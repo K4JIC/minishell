@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tozaki <tozaki@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tozaki <tozaki@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 16:31:05 by tozaki            #+#    #+#             */
-/*   Updated: 2026/04/13 22:22:15 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/04/23 01:30:20 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,14 @@ void		print_all_token(t_token *head);
 t_token_type_len	get_one_token_len(char *p);
 t_token				*convert_line_to_token(char *p);
 void				set_all_op_label(t_token *head);
+
+// expand_token.c
+int	expand_token(t_token *tk_head, t_minishell *ms);
+
+// expand_envval.c
+int	expand_dollar_mark(char *dollar, t_dynamic_str *buf, t_list *env_list, int exit_status);
+
+// expand_quote.c
+int	expand_quote(char *p, t_dynamic_str *buf, t_list *env_list, int exit_status);
 
 #endif
