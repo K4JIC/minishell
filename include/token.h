@@ -6,7 +6,7 @@
 /*   By: tozaki <tozaki@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/28 16:31:05 by tozaki            #+#    #+#             */
-/*   Updated: 2026/04/23 01:30:20 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/04/23 01:39:09 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ t_token				*convert_line_to_token(char *p);
 void				set_all_op_label(t_token *head);
 
 // expand_token.c
-int	expand_token(t_token *tk_head, t_minishell *ms);
+int	no_expand(char p, t_dynamic_str *buf);
 
 // expand_envval.c
 int	expand_dollar_mark(char *dollar, t_dynamic_str *buf, t_list *env_list, int exit_status);

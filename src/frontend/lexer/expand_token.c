@@ -6,13 +6,13 @@
 /*   By: tozaki <tozaki@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/20 19:15:51 by tozaki            #+#    #+#             */
-/*   Updated: 2026/04/23 01:17:59 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/04/23 01:38:27 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	no_expand(char p, t_dynamic_str *buf)
+int	no_expand(char p, t_dynamic_str *buf)
 {
 	if (putnstr_buf(buf, &p, 1) == FAILURE)
 		return (-1);
