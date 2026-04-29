@@ -13,6 +13,9 @@ SRCS	=	$(SRCS_DIR)/main.c\
 			$(SRCS_DIR)/frontend/frontend.c\
 			$(SRCS_DIR)/frontend/lexer/label_token.c\
 			$(SRCS_DIR)/frontend/lexer/tokenizer.c\
+			$(SRCS_DIR)/frontend/lexer/expand_token.c\
+			$(SRCS_DIR)/frontend/lexer/expand_envval.c\
+			$(SRCS_DIR)/frontend/lexer/expand_quote.c\
 			$(SRCS_DIR)/frontend/parser/encase_cmd_exec.c\
 			$(SRCS_DIR)/frontend/parser/encase_cmd_list.c\
 			$(SRCS_DIR)/frontend/parser/encase_cmd_pipe.c\
@@ -42,7 +45,8 @@ SRCS	=	$(SRCS_DIR)/main.c\
 			$(SRCS_DIR)/executor/env_array.c\
 			$(SRCS_DIR)/utils/list/intrusive_list.c\
 			$(SRCS_DIR)/utils/msmalloc/ms_malloc.c\
-			$(SRCS_DIR)/utils/quote/ms_quote.c
+			$(SRCS_DIR)/utils/quote/ms_quote.c\
+			$(SRCS_DIR)/utils/string/dynamic_string.c
 
 DEBUG_SRCS	=	$(SRCS_DIR)/test/frontend_test.c\
 				$(SRCS_DIR)/test/print_cmds.c\

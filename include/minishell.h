@@ -92,4 +92,6 @@ t_token_lr	sep_token_list_op(t_token *head, t_token *tail);
 t_cmd_base	*create_cmd_btree_node(t_operator_type type);
 void		syntax_error(char *msg, t_minishell *sh);
 
+int			expand_token(t_token *tk_head, t_minishell *ms);
+
 #endif

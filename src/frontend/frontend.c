@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frontend.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tozaki <tozaki@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tozaki <tozaki@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 23:11:10 by tozaki            #+#    #+#             */
-/*   Updated: 2026/04/14 04:16:40 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/04/23 01:49:58 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@ int	frontend(char *input, t_minishell *ms)
 	if (tk_head == NULL)
 		return (FAILURE);
 	set_all_op_label(tk_head);
+	ret = expand_token(tk_head, ms);
+	if (ret == FAILURE)
+	{
+		free_all_token(tk_head);
+		ms->tokens = NULL;
+		return (FAILURE);
+	}
 	ms->tokens = tk_head;
 	ret = convert_token_to_cmd(ms, &cmd_head, tk_head);
 	free_all_token(ms->tokens);
