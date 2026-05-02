@@ -6,7 +6,7 @@
 /*   By: tozaki <tozaki@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 18:04:28 by tozaki            #+#    #+#             */
-/*   Updated: 2026/04/30 21:21:27 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/05/01 21:23:43 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_pipe_state	*init_pipe_state(void)
 	new = ft_calloc(1, sizeof(t_pipe_state));
 	if (!new)
 		return (NULL);
-	new->pids = ft_calloc()
+	new->pids = ft_calloc();
 }
 
 int	exec_pipe(t_cmd_pipe *pipe, t_minishell *ms, t_cmd_ctx *ctx)
