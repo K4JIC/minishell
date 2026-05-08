@@ -78,6 +78,18 @@ typedef struct s_env_set
 	char	**envp;
 }	t_env_set;
 
+typedef struct s_pipe_state
+{
+	bool	is_owner;
+	pid_t	*pids;
+	pid_t	error_cmd;
+}	t_pipe_state;
+
+typedef struct s_cmd_ctx
+{
+	t_pipe_state	*pipe_state;
+}	t_cmd_ctx;
+
 void	free_cmds(t_cmd_base *cmd_head);
 
 #endif

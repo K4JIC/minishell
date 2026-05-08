@@ -71,6 +71,8 @@ int		ft_exit(char **args, t_minishell *ms);
 bool	is_builtin(const char *name);
 int		dispatch_builtin(char **args, t_minishell *ms);
 int		executor(t_cmd_base *tree, t_minishell *ms);
+int		exec_node(t_cmd_base *node, t_minishell *ms, t_cmd_ctx *ctx);
+int		exec_pipe(t_cmd_pipe *pipe_node, t_minishell *ms, t_cmd_ctx *ctx);
 int		exec_external(t_cmd_exec *cmd, t_minishell *ms);
 char	*find_cmd_path(const char *name, t_list *env_list);
 char	**env_list_to_envp(t_list *env_list);

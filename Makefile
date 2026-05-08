@@ -40,6 +40,7 @@ SRCS	=	$(SRCS_DIR)/main.c\
 			$(SRCS_DIR)/envlst/utils/set_env.c\
 			$(SRCS_DIR)/executor/builtin_dispatch.c\
 			$(SRCS_DIR)/executor/executor.c\
+			$(SRCS_DIR)/executor/exec_pipe.c\
 			$(SRCS_DIR)/executor/exec_external.c\
 			$(SRCS_DIR)/executor/path_resolve.c\
 			$(SRCS_DIR)/executor/env_array.c\

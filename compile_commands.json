@@ -2,7 +2,7 @@
   {
     "file": "src/main.c",
     "arguments": [
-      "cc",
+      "/usr/bin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -13,13 +13,13 @@
       "-o",
       "obj/main.o"
     ],
-    "directory": "/home/tozaki/cursus/milestone3/42_03_minisharing",
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
     "output": "obj/main.o"
   },
   {
     "file": "src/frontend/frontend.c",
     "arguments": [
-      "cc",
+      "/usr/bin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -30,13 +30,13 @@
       "-o",
       "obj/frontend/frontend.o"
     ],
-    "directory": "/home/tozaki/cursus/milestone3/42_03_minisharing",
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
     "output": "obj/frontend/frontend.o"
   },
   {
     "file": "src/frontend/lexer/label_token.c",
     "arguments": [
-      "cc",
+      "/usr/bin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -47,13 +47,13 @@
       "-o",
       "obj/frontend/lexer/label_token.o"
     ],
-    "directory": "/home/tozaki/cursus/milestone3/42_03_minisharing",
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
     "output": "obj/frontend/lexer/label_token.o"
   },
   {
     "file": "src/frontend/lexer/tokenizer.c",
     "arguments": [
-      "cc",
+      "/usr/bin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -64,30 +64,132 @@
       "-o",
       "obj/frontend/lexer/tokenizer.o"
     ],
-    "directory": "/home/tozaki/cursus/milestone3/42_03_minisharing",
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
     "output": "obj/frontend/lexer/tokenizer.o"
   },
   {
-    "file": "src/frontend/parser/print_cmds.c",
+    "file": "src/frontend/lexer/expand_token.c",
     "arguments": [
-      "cc",
+      "/usr/bin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
       "-Iinclude",
       "-Isrc/libft",
       "-c",
-      "src/frontend/parser/print_cmds.c",
+      "src/frontend/lexer/expand_token.c",
       "-o",
-      "obj/frontend/parser/print_cmds.o"
+      "obj/frontend/lexer/expand_token.o"
     ],
-    "directory": "/home/tozaki/cursus/milestone3/42_03_minisharing",
-    "output": "obj/frontend/parser/print_cmds.o"
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
+    "output": "obj/frontend/lexer/expand_token.o"
+  },
+  {
+    "file": "src/frontend/lexer/expand_envval.c",
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/frontend/lexer/expand_envval.c",
+      "-o",
+      "obj/frontend/lexer/expand_envval.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
+    "output": "obj/frontend/lexer/expand_envval.o"
+  },
+  {
+    "file": "src/frontend/lexer/expand_quote.c",
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/frontend/lexer/expand_quote.c",
+      "-o",
+      "obj/frontend/lexer/expand_quote.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
+    "output": "obj/frontend/lexer/expand_quote.o"
+  },
+  {
+    "file": "src/frontend/parser/encase_cmd_exec.c",
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/frontend/parser/encase_cmd_exec.c",
+      "-o",
+      "obj/frontend/parser/encase_cmd_exec.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
+    "output": "obj/frontend/parser/encase_cmd_exec.o"
+  },
+  {
+    "file": "src/frontend/parser/encase_cmd_list.c",
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/frontend/parser/encase_cmd_list.c",
+      "-o",
+      "obj/frontend/parser/encase_cmd_list.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
+    "output": "obj/frontend/parser/encase_cmd_list.o"
+  },
+  {
+    "file": "src/frontend/parser/encase_cmd_pipe.c",
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/frontend/parser/encase_cmd_pipe.c",
+      "-o",
+      "obj/frontend/parser/encase_cmd_pipe.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
+    "output": "obj/frontend/parser/encase_cmd_pipe.o"
+  },
+  {
+    "file": "src/frontend/parser/encase_cmd_redir.c",
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/frontend/parser/encase_cmd_redir.c",
+      "-o",
+      "obj/frontend/parser/encase_cmd_redir.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
+    "output": "obj/frontend/parser/encase_cmd_redir.o"
   },
   {
     "file": "src/frontend/parser/separate_token.c",
     "arguments": [
-      "cc",
+      "/usr/bin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -98,13 +200,30 @@
       "-o",
       "obj/frontend/parser/separate_token.o"
     ],
-    "directory": "/home/tozaki/cursus/milestone3/42_03_minisharing",
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
     "output": "obj/frontend/parser/separate_token.o"
+  },
+  {
+    "file": "src/frontend/parser/token_to_cmd.c",
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/frontend/parser/token_to_cmd.c",
+      "-o",
+      "obj/frontend/parser/token_to_cmd.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
+    "output": "obj/frontend/parser/token_to_cmd.o"
   },
   {
     "file": "src/frontend/utils/find_token.c",
     "arguments": [
-      "cc",
+      "/usr/bin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -115,30 +234,30 @@
       "-o",
       "obj/frontend/utils/find_token.o"
     ],
-    "directory": "/home/tozaki/cursus/milestone3/42_03_minisharing",
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
     "output": "obj/frontend/utils/find_token.o"
   },
   {
-    "file": "src/frontend/utils/print_token.c",
+    "file": "src/frontend/utils/cmd_btree.c",
     "arguments": [
-      "cc",
+      "/usr/bin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
       "-Iinclude",
       "-Isrc/libft",
       "-c",
-      "src/frontend/utils/print_token.c",
+      "src/frontend/utils/cmd_btree.c",
       "-o",
-      "obj/frontend/utils/print_token.o"
+      "obj/frontend/utils/cmd_btree.o"
     ],
-    "directory": "/home/tozaki/cursus/milestone3/42_03_minisharing",
-    "output": "obj/frontend/utils/print_token.o"
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
+    "output": "obj/frontend/utils/cmd_btree.o"
   },
   {
     "file": "src/frontend/utils/token_list.c",
     "arguments": [
-      "cc",
+      "/usr/bin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -149,13 +268,149 @@
       "-o",
       "obj/frontend/utils/token_list.o"
     ],
-    "directory": "/home/tozaki/cursus/milestone3/42_03_minisharing",
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
     "output": "obj/frontend/utils/token_list.o"
+  },
+  {
+    "file": "src/built_in/cd/ft_cd.c",
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/built_in/cd/ft_cd.c",
+      "-o",
+      "obj/built_in/cd/ft_cd.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
+    "output": "obj/built_in/cd/ft_cd.o"
+  },
+  {
+    "file": "src/built_in/echo/ft_echo.c",
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/built_in/echo/ft_echo.c",
+      "-o",
+      "obj/built_in/echo/ft_echo.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
+    "output": "obj/built_in/echo/ft_echo.o"
+  },
+  {
+    "file": "src/built_in/env/ft_env.c",
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/built_in/env/ft_env.c",
+      "-o",
+      "obj/built_in/env/ft_env.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
+    "output": "obj/built_in/env/ft_env.o"
+  },
+  {
+    "file": "src/built_in/exit/ft_exit.c",
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/built_in/exit/ft_exit.c",
+      "-o",
+      "obj/built_in/exit/ft_exit.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
+    "output": "obj/built_in/exit/ft_exit.o"
+  },
+  {
+    "file": "src/built_in/export/ft_export.c",
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/built_in/export/ft_export.c",
+      "-o",
+      "obj/built_in/export/ft_export.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
+    "output": "obj/built_in/export/ft_export.o"
+  },
+  {
+    "file": "src/built_in/export/print_export.c",
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/built_in/export/print_export.c",
+      "-o",
+      "obj/built_in/export/print_export.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
+    "output": "obj/built_in/export/print_export.o"
+  },
+  {
+    "file": "src/built_in/pwd/ft_pwd.c",
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/built_in/pwd/ft_pwd.c",
+      "-o",
+      "obj/built_in/pwd/ft_pwd.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
+    "output": "obj/built_in/pwd/ft_pwd.o"
+  },
+  {
+    "file": "src/built_in/unset/ft_unset.c",
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/built_in/unset/ft_unset.c",
+      "-o",
+      "obj/built_in/unset/ft_unset.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
+    "output": "obj/built_in/unset/ft_unset.o"
   },
   {
     "file": "src/envlst/envp_to_lst.c",
     "arguments": [
-      "cc",
+      "/usr/bin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -166,13 +421,183 @@
       "-o",
       "obj/envlst/envp_to_lst.o"
     ],
-    "directory": "/home/tozaki/cursus/milestone3/42_03_minisharing",
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
     "output": "obj/envlst/envp_to_lst.o"
+  },
+  {
+    "file": "src/envlst/utils/find_env.c",
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/envlst/utils/find_env.c",
+      "-o",
+      "obj/envlst/utils/find_env.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
+    "output": "obj/envlst/utils/find_env.o"
+  },
+  {
+    "file": "src/envlst/utils/free_env_content.c",
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/envlst/utils/free_env_content.c",
+      "-o",
+      "obj/envlst/utils/free_env_content.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
+    "output": "obj/envlst/utils/free_env_content.o"
+  },
+  {
+    "file": "src/envlst/utils/remove_env.c",
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/envlst/utils/remove_env.c",
+      "-o",
+      "obj/envlst/utils/remove_env.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
+    "output": "obj/envlst/utils/remove_env.o"
+  },
+  {
+    "file": "src/envlst/utils/set_env.c",
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/envlst/utils/set_env.c",
+      "-o",
+      "obj/envlst/utils/set_env.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
+    "output": "obj/envlst/utils/set_env.o"
+  },
+  {
+    "file": "src/executor/builtin_dispatch.c",
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/executor/builtin_dispatch.c",
+      "-o",
+      "obj/executor/builtin_dispatch.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
+    "output": "obj/executor/builtin_dispatch.o"
+  },
+  {
+    "file": "src/executor/executor.c",
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/executor/executor.c",
+      "-o",
+      "obj/executor/executor.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
+    "output": "obj/executor/executor.o"
+  },
+  {
+    "file": "src/executor/exec_pipe.c",
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/executor/exec_pipe.c",
+      "-o",
+      "obj/executor/exec_pipe.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
+    "output": "obj/executor/exec_pipe.o"
+  },
+  {
+    "file": "src/executor/exec_external.c",
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/executor/exec_external.c",
+      "-o",
+      "obj/executor/exec_external.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
+    "output": "obj/executor/exec_external.o"
+  },
+  {
+    "file": "src/executor/path_resolve.c",
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/executor/path_resolve.c",
+      "-o",
+      "obj/executor/path_resolve.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
+    "output": "obj/executor/path_resolve.o"
+  },
+  {
+    "file": "src/executor/env_array.c",
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/executor/env_array.c",
+      "-o",
+      "obj/executor/env_array.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
+    "output": "obj/executor/env_array.o"
   },
   {
     "file": "src/utils/list/intrusive_list.c",
     "arguments": [
-      "cc",
+      "/usr/bin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -183,13 +608,13 @@
       "-o",
       "obj/utils/list/intrusive_list.o"
     ],
-    "directory": "/home/tozaki/cursus/milestone3/42_03_minisharing",
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
     "output": "obj/utils/list/intrusive_list.o"
   },
   {
     "file": "src/utils/msmalloc/ms_malloc.c",
     "arguments": [
-      "cc",
+      "/usr/bin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -200,13 +625,13 @@
       "-o",
       "obj/utils/msmalloc/ms_malloc.o"
     ],
-    "directory": "/home/tozaki/cursus/milestone3/42_03_minisharing",
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
     "output": "obj/utils/msmalloc/ms_malloc.o"
   },
   {
     "file": "src/utils/quote/ms_quote.c",
     "arguments": [
-      "cc",
+      "/usr/bin/cc",
       "-Wall",
       "-Wextra",
       "-Werror",
@@ -217,7 +642,24 @@
       "-o",
       "obj/utils/quote/ms_quote.o"
     ],
-    "directory": "/home/tozaki/cursus/milestone3/42_03_minisharing",
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
     "output": "obj/utils/quote/ms_quote.o"
+  },
+  {
+    "file": "src/utils/string/dynamic_string.c",
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Iinclude",
+      "-Isrc/libft",
+      "-c",
+      "src/utils/string/dynamic_string.c",
+      "-o",
+      "obj/utils/string/dynamic_string.o"
+    ],
+    "directory": "/home/tozaki/cursus/milestone3/minishell",
+    "output": "obj/utils/string/dynamic_string.o"
   }
 ]
