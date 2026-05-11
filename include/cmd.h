@@ -6,7 +6,7 @@
 /*   By: tozaki <tozaki@student.42.jp>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/21 18:43:55 by tozaki            #+#    #+#             */
-/*   Updated: 2026/04/06 23:11:26 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/05/10 18:01:02 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ typedef enum
 // binary tree structure
 typedef struct s_cmd_base
 {
-	t_cmd_type	type;
+	t_cmd_type			type;
+	struct s_cmd_base	*left;
+	struct s_cmd_base	*right;
 }	t_cmd_base;
 
 typedef struct s_cmd_exec
@@ -49,13 +51,6 @@ typedef struct s_cmd_redir
 	t_operator_type			mode;
 	int						fd;
 }	t_cmd_redir;
-
-typedef struct s_cmd_btree
-{
-	t_cmd_type	type;
-	t_cmd_base	*left;
-	t_cmd_base	*right;
-}	t_cmd_btree;
 
 typedef struct s_cmd_pipe
 {
@@ -78,16 +73,9 @@ typedef struct s_env_set
 	char	**envp;
 }	t_env_set;
 
-typedef struct s_pipe_state
-{
-	bool	is_owner;
-	pid_t	*pids;
-	pid_t	error_cmd;
-}	t_pipe_state;
-
 typedef struct s_cmd_ctx
 {
-	t_pipe_state	*pipe_state;
+	int	dummy; // placeholder if ctx becomes empty
 }	t_cmd_ctx;
 
 void	free_cmds(t_cmd_base *cmd_head);

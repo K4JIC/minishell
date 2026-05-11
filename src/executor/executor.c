@@ -54,14 +54,14 @@ static int	exec_simple(t_cmd_exec *cmd, t_minishell *ms)
  * - src/executor/exec_redir.c
  * - src/executor/heredoc.c
  */
-int	exec_node(t_cmd_base *node, t_minishell *ms, t_cmd_ctx *ctx)
+int	exec_node(t_cmd_base *node, t_minishell *ms)
 {
 	if (!node)
 		return (SUCCESS);
 	if (node->type == CMD_EXEC)
 		return (exec_simple((t_cmd_exec *)node, ms));
 	if (node->type == CMD_PIPE)
-		return (exec_pipe((t_cmd_pipe *)node, ms, ctx));
+		return (exec_pipe((t_cmd_pipe *)node, ms));
 	ft_putstr_fd("executor: node type not implemented\n", STDERR_FILENO);
 	return (FAILURE);
 }
@@ -75,12 +75,10 @@ int	exec_node(t_cmd_base *node, t_minishell *ms, t_cmd_ctx *ctx)
 int	executor(t_cmd_base *tree, t_minishell *ms)
 {
 	int			status;
-	t_cmd_ctx	ctx;
 
 	if (!tree)
 		return (SUCCESS);
-	ctx.pipe_state = NULL;
-	status = exec_node(tree, ms, &ctx);
+	status = exec_node(tree, ms);
 	ms->exit_status = status;
 	return (status);
 }

@@ -25,32 +25,45 @@
 typedef struct s_env{
 	char			*key;
 	char			*value;
-}t_env;
+}	t_env;
 
 typedef enum e_redirect_type{
 	REDIR_IN,
 	REDIR_OUT,
 	REDIR_APPEND,
 	REDIR_HEREDOC
-}t_redirect_type;
+}	t_redirect_type;
 
 typedef struct s_redirect{
 	t_redirect_type	type;
 	char			*file;
 	int				fd;
-}t_redirect;
+}	t_redirect;
+
+typedef struct s_pipe_info
+{
+	int		cmds_count;
+	pid_t	*pids;
+	pid_t	err_pid;
+	int		pid_idx;
+	int		fd[2];
+	int		prev_in;
+	bool	is_owner;
+}	t_pipe_info;
+
 
 //The master structure that controls everything
 typedef struct s_minishell{
 	t_list		*env_list;
 	t_token		*tokens;
 	t_cmd_base	*cmd_btree;
+	t_pipe_info	*pipe_info;
 	int			exit_status;//for $?
 	int			syntax_error;// syntax_error flag
 	int			stdin_backup;// for redirection and built-in commands
 	int			stdout_backup;
 	int			should_exit;
-}t_minishell;
+}	t_minishell;
 
 t_list	*envp_to_lst(char **envp);
 t_env	*find_env(t_list *env_list, char *key);
@@ -71,8 +84,8 @@ int		ft_exit(char **args, t_minishell *ms);
 bool	is_builtin(const char *name);
 int		dispatch_builtin(char **args, t_minishell *ms);
 int		executor(t_cmd_base *tree, t_minishell *ms);
-int		exec_node(t_cmd_base *node, t_minishell *ms, t_cmd_ctx *ctx);
-int		exec_pipe(t_cmd_pipe *pipe_node, t_minishell *ms, t_cmd_ctx *ctx);
+int		exec_node(t_cmd_base *node, t_minishell *ms);
+int		exec_pipe(t_cmd_pipe *pipe_node, t_minishell *ms);
 int		exec_external(t_cmd_exec *cmd, t_minishell *ms);
 char	*find_cmd_path(const char *name, t_list *env_list);
 char	**env_list_to_envp(t_list *env_list);

@@ -6,7 +6,7 @@
 /*   By: tozaki <tozaki@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 23:10:11 by tozaki            #+#    #+#             */
-/*   Updated: 2026/04/14 19:33:53 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/05/10 18:01:41 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,15 @@ int convert_list(t_minishell *sh, t_cmd_base **parent, t_token_lr lr)
 	*parent = create_list_node();
 	if (!*parent)
 		return (FAILURE);
-	ret = dispatch_token_conversion(sh, &((t_cmd_btree *)*parent)->left,
+	ret = dispatch_token_conversion(sh, &((t_cmd_base *)*parent)->left,
 									lr.left.head, lr.left.tail);
 	if (ret == FAILURE)
 		return (free(*parent), FAILURE);
-	ret = dispatch_token_conversion(sh, &((t_cmd_btree *)*parent)->right,
+	ret = dispatch_token_conversion(sh, &((t_cmd_base *)*parent)->right,
 									lr.right.head, lr.right.tail);
 	if (ret == FAILURE)
 	{
-		free_cmds(((t_cmd_btree *)*parent)->left);
+		free_cmds(((t_cmd_base *)*parent)->left);
 		return (free(*parent), FAILURE);
 	}
 	return (SUCCESS);

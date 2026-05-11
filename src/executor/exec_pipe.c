@@ -6,116 +6,138 @@
 /*   By: tozaki <tozaki@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/29 18:04:28 by tozaki            #+#    #+#             */
-/*   Updated: 2026/05/07 15:13:33 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/05/11 19:45:55 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <sys/wait.h>
 
-// one-pass structure
-// allocate memory and execute command at once.
-
-t_pipe_state	*init_pipe_state(void)
+static int	count_commands(t_cmd_base *node, int count)
 {
-	t_pipe_state	*new;
-
-	new = ft_calloc(1, sizeof(t_pipe_state));
-	if (!new)
-		return (NULL);
-	new->pids = ft_calloc(BUFFER_SIZE, sizeof(pid_t));
-	if (!new->pids)
-	{
-		free(new);
-		return (NULL);
-	}
-	new->error_cmd = -1;
-	return (new);
+	if (!node)
+		return (count);
+	if (node->type == CMD_EXEC)
+		return (count + 1);
+	count = count_commands(node->left, count);
+	count = count_commands(node->right, count);
+	return (count);
 }
 
-static void	add_pid(t_pipe_state *state, pid_t pid)
+static t_pipe_info	*init_pipeinfo(int count)
+{
+	t_pipe_info	*pinfo;
+
+	if (!count)
+		return (NULL);
+	pinfo = ft_calloc(1, sizeof(t_pipe_info));
+	if (!pinfo)
+		return (NULL);
+	pinfo->pids = ft_calloc(count, sizeof(pid_t));
+	if (!pinfo->pids)
+		return (free(pinfo), NULL);
+	ft_memset(pinfo->fd, -1, 2 * sizeof(int));
+	ft_memset(pinfo->pids, -1, count * sizeof(pid_t));
+	return (pinfo);
+}
+
+static int	do_left(t_cmd_base *node, t_minishell *ms)
+{
+	dup2(ms->pipe_info->fd[1], STDOUT_FILENO);
+	close(ms->pipe_info->fd[0]);
+	dup2(ms->pipe_info->prev_in, STDIN_FILENO);
+	close(ms->pipe_info->prev_in);
+	exit(exec_node(node->left, ms));
+}
+
+static int	do_last_cmd(t_cmd_base *node, t_minishell *ms)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		dup2(ms->pipe_info->prev_in, STDIN_FILENO);
+		close(ms->pipe_info->prev_in);
+		exit(exec_node(node->right, ms));
+	}
+	else
+		ms->pipe_info->pids[ms->pipe_info->pid_idx] = pid;
+	return (SUCCESS);
+}
+
+static int	do_right(t_cmd_base *node, t_minishell *ms)
+{
+	if (ms->pipe_info->pid_idx == ms->pipe_info->cmds_count)
+		return (do_last_cmd(node, ms));
+	ms->pipe_info->prev_in = ms->pipe_info->fd[0];
+	close(ms->pipe_info->fd[1]);
+	return (exec_node(node->right, ms));
+}
+
+static int	fork_and_dup(t_cmd_base *node, t_minishell *ms)
+{
+	int	pid;
+	int	ret;
+
+	pid = fork();
+	if (pid == 0)
+		ret = do_left(node, ms);
+	else
+	{
+		ms->pipe_info->pids[ms->pipe_info->pid_idx++] = pid;
+		ret = do_right(node, ms);
+	}
+	if (ret == FAILURE)
+		return (FAILURE);
+	return (SUCCESS);
+}
+
+static int	pipe_and_fork(t_cmd_base *node, t_minishell *ms)
+{
+	int	ret;
+
+	ret = pipe(ms->pipe_info->fd);
+	if (ret == -1)
+		return (FAILURE);
+	ret = fork_and_dup(node, ms);
+	if (ret == FAILURE)
+		return (FAILURE);
+	return (SUCCESS);
+}
+
+static void	wait_all(t_minishell *ms)
 {
 	int	i;
+	int	wstatus;
 
 	i = 0;
-	while (i < BUFFER_SIZE - 1 && state->pids[i] != 0)
-		i++;
-	state->pids[i] = pid;
-}
-
-static int	wait_all(t_pipe_state *state, pid_t last_pid)
-{
-	int		i;
-	int		status;
-	int		last_status;
-
-	i = 0;
-	last_status = 0;
-	while (state->pids[i] != 0)
+	while (i < ms->pipe_info->cmds_count)
 	{
-		if (waitpid(state->pids[i], &status, 0) != -1)
-		{
-			if (state->pids[i] == last_pid)
-			{
-				if (WIFEXITED(status))
-					last_status = WEXITSTATUS(status);
-				else if (WIFSIGNALED(status))
-					last_status = 128 + WTERMSIG(status);
-			}
-		}
+		waitpid(ms->pipe_info->pids[i], &wstatus, 0);
+		if (WIFEXITED(wstatus) != true)
+			ms->pipe_info->err_pid = ms->pipe_info->pids[i];
 		i++;
 	}
-	return (last_status);
 }
 
-int	exec_pipe(t_cmd_pipe *pipe_node, t_minishell *ms, t_cmd_ctx *ctx)
+int	exec_pipe(t_cmd_pipe *node, t_minishell *ms)
 {
-	int		fds[2];
-	pid_t	pid_left;
-	pid_t	pid_right;
+	int	count;
 
-	if (ctx->pipe_state == NULL)
+	if (ms->pipe_info == NULL)
 	{
-		ctx->pipe_state = init_pipe_state();
-		if (!ctx->pipe_state)
+		count = count_commands((t_cmd_base *)node, 0);
+		ms->pipe_info = init_pipeinfo(count);
+		ms->pipe_info->is_owner = true;
+		if (!ms->pipe_info)
 			return (FAILURE);
-		ctx->pipe_state->is_owner = 1;
 	}
-	if (pipe(fds) == -1)
+	else
+		ms->pipe_info->is_owner = false;
+	if (pipe_and_fork((t_cmd_base *)node, ms) == FAILURE)
 		return (FAILURE);
-	pid_left = fork();
-	if (pid_left == -1)
-		return (FAILURE);
-	if (pid_left == 0)
-	{
-		ctx->pipe_state->is_owner = 0;
-		dup2(fds[1], STDOUT_FILENO);
-		close(fds[0]);
-		close(fds[1]);
-		exit(exec_node(pipe_node->left, ms, ctx));
-	}
-	add_pid(ctx->pipe_state, pid_left);
-	pid_right = fork();
-	if (pid_right == -1)
-		return (FAILURE);
-	if (pid_right == 0)
-	{
-		ctx->pipe_state->is_owner = 0;
-		dup2(fds[0], STDIN_FILENO);
-		close(fds[0]);
-		close(fds[1]);
-		exit(exec_node(pipe_node->right, ms, ctx));
-	}
-	add_pid(ctx->pipe_state, pid_right);
-	close(fds[0]);
-	close(fds[1]);
-	if (ctx->pipe_state->is_owner)
-	{
-		int res = wait_all(ctx->pipe_state, pid_right);
-		free(ctx->pipe_state->pids);
-		free(ctx->pipe_state);
-		ctx->pipe_state = NULL;
-		return (res);
-	}
+	if (ms->pipe_info->is_owner == true)
+		wait_all(ms);
 	return (SUCCESS);
 }

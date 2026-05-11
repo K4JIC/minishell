@@ -6,7 +6,7 @@
 /*   By: tozaki <tozaki@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 23:10:30 by tozaki            #+#    #+#             */
-/*   Updated: 2026/04/06 23:10:33 by tozaki           ###   ########.fr       */
+/*   Updated: 2026/05/10 18:03:28 by tozaki           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	free_cmd_redir(t_cmd_redir *cmd)
 	free(cmd);
 }
 
-static void	free_cmd_btree(t_cmd_btree *cmd)
+static void	free_cmd_base(t_cmd_base *cmd)
 {
 	if (cmd == NULL)
 		return ;
@@ -64,5 +64,5 @@ void	free_cmds(t_cmd_base *cmd_head)
 	else if (cmd_head->type == CMD_REDIR)
 		free_cmd_redir((t_cmd_redir *)cmd_head);
 	else if (cmd_head->type == CMD_PIPE || cmd_head->type == CMD_LIST)
-		free_cmd_btree((t_cmd_btree *)cmd_head);
+		free_cmd_base((t_cmd_base *)cmd_head);
 }
