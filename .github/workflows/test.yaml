@@ -1,0 +1,2 @@
+- run: echo shell
+  shell: bash
