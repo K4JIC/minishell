@@ -5,4 +5,21 @@ jobs:
   echo_shell:
     runs-on: ubuntu-latest
     steps:
-      - run: echo shell
+      - name: "define func"
+        run: |
+          echo 'view_diff()
+          {
+            echo $1 | bash > expected
+            echo $1 | ./minishell > actual
+            diff expected actual
+          }' > .functions.sh
+
+      - name: "test 1"
+        run: |
+          source .functions.sh
+          view_diff "echo hello"
+
+      - name: "test 2"
+        run: |
+          source .functions.sh
+          view_diff "ls"
