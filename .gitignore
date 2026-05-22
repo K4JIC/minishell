@@ -1,7 +1,7 @@
 *.o
 *.out
 *.a
-minishell
 test
+minishell
 .vscode/
 test/
