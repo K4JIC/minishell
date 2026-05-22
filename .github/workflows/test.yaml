@@ -5,5 +5,4 @@ jobs:
   echo_shell:
     runs-on: ubuntu-latest
     steps:
-      - run:
-        echo shell
+      - run: echo shell
