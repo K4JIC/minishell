@@ -5,11 +5,8 @@ jobs:
   echo_shell:
     runs-on: ubuntu-latest
     steps:
-      - name: "pwd"
-        run: pwd
-
-      - name: "ls"
-        run: ls -aF
+      - name: "chdir"
+        run: cd ..
 
       - name: "define func"
         run: |
