@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        usrs: actions/checkout@4
+        uses: actions/checkout@4
 
       - name: "define func"
         run: |
