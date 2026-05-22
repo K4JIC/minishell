@@ -1,2 +1,4 @@
-run: echo shell
-shell: bash
+run:
+  echo shell
+shell:
+  bash
