@@ -5,6 +5,9 @@ jobs:
   echo_shell:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        usrs: actions/checkout@4
+
       - name: "define func"
         run: |
           echo 'view_diff()
@@ -15,9 +18,7 @@ jobs:
           }' > .functions.sh
 
       - name: "build minishell"
-        run: |
-          make -C ..
-          cp ../minishell .
+        run: make
 
       - name: "test 1"
         run: |
