@@ -7,6 +7,10 @@ jobs:
     steps:
       - name: "pwd"
         run: pwd
+
+      - name: "ls"
+        run: ls -aF
+
       - name: "define func"
         run: |
           echo 'view_diff()
