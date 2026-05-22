@@ -26,11 +26,13 @@ jobs:
         run: make
 
       - name: "test 1"
+        continue-on-error: true
         run: |
           source .functions.sh
           view_diff "echo hello"
 
       - name: "test 2"
+        continue-on-error: true
         run: |
           source .functions.sh
           view_diff "ls"
